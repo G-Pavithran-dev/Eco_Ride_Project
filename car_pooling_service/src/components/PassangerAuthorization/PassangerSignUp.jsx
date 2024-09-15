@@ -372,7 +372,7 @@ export default function PassangerSignUp() {
                       <AlertDialogContent>
                         <AlertDialogHeader>
                           {idCardCheck && <><AlertDialogTitle>Invalid ID Card</AlertDialogTitle></>}
-                          {!idCardCheck && <><AlertDialogTitle>OTP Verification</AlertDialogTitle>
+                          {!idCardCheck && open && <><AlertDialogTitle>OTP Verification</AlertDialogTitle>
                           <AlertDialogDescription>
                             You're at the final step. Enter the OTP sent to your
                             mail <b>{email}</b> to complete the registration.

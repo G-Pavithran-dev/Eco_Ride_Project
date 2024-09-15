@@ -3,32 +3,33 @@ import {
   BrowserRouter as Router,
   Routes,
   useLocation,
-} from "react-router-dom";
-import BookRide from "./components/BookRide/BookRide";
-import { ThemeProvider } from "./components/ThemeProvider.jsx";
-import Homepage from "./components/Homepage/Homepage";
-import SignInSide from "./components/SignIn/SignIn";
-import SignUp from "./components/SignUp/SignUp";
-import CreateRide from "./components/CreateRide/CreateRide";
-import Navbar from "./components/NavBar/NavBar";
-import ProfilePage from "./components/ProfilePage/ProfilePage";
+} from 'react-router-dom'
+import BookRide from './components/BookRide/BookRide'
+import { ThemeProvider } from './components/ThemeProvider.jsx'
+import Homepage from './components/Homepage/Homepage'
+import SignInSide from './components/SignIn/SignIn'
+import SignUp from './components/SignUp/SignUp'
+import CreateRide from './components/CreateRide/CreateRide'
+import Navbar from './components/NavBar/NavBar'
+import ProfilePage from './components/ProfilePage/ProfilePage'
 
-import { AnimatePresence, motion } from "framer-motion";
-import PropTypes from "prop-types";
-import SuccessSignIn from "./components/SignIn/SuccessSignin";
-import PublishedRideHistory from "./components/PublishedRideHistory/PublishedRideHistory";
-import PilotsRideHistory from "./components/PilotsRideHistory/PilotsRideHistory.jsx";
+import { AnimatePresence, motion } from 'framer-motion'
+import PropTypes from 'prop-types'
+import SuccessSignIn from './components/SignIn/SuccessSignin'
+import PublishedRideHistory from './components/PublishedRideHistory/PublishedRideHistory'
+import PilotsRideHistory from './components/PilotsRideHistory/PilotsRideHistory.jsx'
 
-import PassangerSignIn from "./components/PassangerAuthorization/PassangerSignIn";
-import PassangerSignUp from "./components/PassangerAuthorization/PassangerSignUp";
-import RiderSignUp from "./components/RiderAuthorization/RiderSignUp";
-import Footer from "./components/Footer/Footer.jsx";
-import Map from "./components/Map/Map.jsx";
-import MyModal from "./components/DialogueBox/Dialogue.jsx";
+import PassangerSignIn from './components/PassangerAuthorization/PassangerSignIn'
+import PassangerSignUp from './components/PassangerAuthorization/PassangerSignUp'
+import RiderSignUp from './components/RiderAuthorization/RiderSignUp'
+import Footer from './components/Footer/Footer.jsx'
+import Map from './components/Map/Map.jsx'
+import MyModal from './components/DialogueBox/Dialogue.jsx'
 // import GetStarted from './components/getStartedPage/GetStarted';
+import RideAssistant from './components/CHAT_BOT/EcoRideAsst.jsx'
 const App = () => {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <Router>
         <Navbar />
         <AnimatedRoutes />
@@ -38,11 +39,11 @@ const App = () => {
         </Routes>
       </Router>
     </ThemeProvider>
-  );
-};
+  )
+}
 
 const AnimatedRoutes = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <AnimatePresence mode="wait">
@@ -137,18 +138,25 @@ const AnimatedRoutes = () => {
           }
         />
         <Route
-          path="/dummy"
+          path="/passengerRideHistory"
           element={
             <PageWrapper>
               <PublishedRideHistory />
             </PageWrapper>
           }
         />
-        
+        <Route
+          path="/PilotsRideHistory"
+          element={
+            <PageWrapper>
+              <PilotsRideHistory />
+            </PageWrapper>
+          }
+        />
       </Routes>
     </AnimatePresence>
-  );
-};
+  )
+}
 
 const PageWrapper = ({ children }) => (
   <motion.div
@@ -159,10 +167,10 @@ const PageWrapper = ({ children }) => (
   >
     {children}
   </motion.div>
-);
+)
 
 PageWrapper.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default App;
+export default App

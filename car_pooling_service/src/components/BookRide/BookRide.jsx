@@ -5,8 +5,8 @@ import {
   Paper,
   Typography,
   Checkbox,
-} from "@mui/material";
-import { Button } from "@/components/ui/button";
+} from '@mui/material'
+import { Button } from '@/components/ui/button'
 import {
   DialogTitle,
   DialogContent,
@@ -15,215 +15,215 @@ import {
   TextField,
   ThemeProvider,
   createTheme,
-} from "@mui/material";
-import NavBar from "../NavBar/NavBar";
+} from '@mui/material'
+import NavBar from '../NavBar/NavBar'
 
-import "./BookRide.css";
-import routepng from "./Route2.png";
-import routepngblue from "./route-blue.png";
-import routepngred from "./route-red.png";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import RidePaper from "./RidePaper";
-import car from "./car.png";
-import man from "./man.png";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { setIdselected } from "../Store/Reducer";
-import { Link, useNavigate } from "react-router-dom";
+import './BookRide.css'
+import routepng from './Route2.png'
+import routepngblue from './route-blue.png'
+import routepngred from './route-red.png'
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar'
+import FilterListIcon from '@mui/icons-material/FilterList'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import RidePaper from './RidePaper'
+import car from './car.png'
+import man from './man.png'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIdselected } from '../Store/Reducer'
+import { Link, useNavigate } from 'react-router-dom'
 
 const theme = createTheme({
   components: {
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "black",
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'black',
           },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "black",
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'black',
           },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "black",
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'black',
           },
-          color: "black",
+          color: 'black',
         },
       },
     },
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: "white",
-          "&.Mui-focused": {
-            color: "white",
+          color: 'white',
+          '&.Mui-focused': {
+            color: 'white',
           },
         },
       },
     },
   },
-});
+})
 const BookRide = () => {
-  const passLongitude = localStorage.getItem("passLongitude");
-  const passLatitude = localStorage.getItem("passLati");
+  const passLongitude = localStorage.getItem('passLongitude')
+  const passLatitude = localStorage.getItem('passLati')
   // const passLocation = localStorage.getItem("passLocation");
-  const dispatch = useDispatch();
-  const selectedid = useSelector((state) => state.selectedIdReducer);
-  const [opendilog, setOpendilog] = useState(false);
-  const nav = useNavigate();
+  const dispatch = useDispatch()
+  const selectedid = useSelector((state) => state.selectedIdReducer)
+  const [opendilog, setOpendilog] = useState(false)
+  const nav = useNavigate()
   const f = () => {
-    axios.get("http://localhost:8080/app/bookride/getallrides").then((res) => {
-      console.log("all rides are from book ride ", res.data);
+    axios.get('http://localhost:8080/app/bookride/getallrides').then((res) => {
+      console.log('all rides are from book ride ', res.data)
       const updatedRidesData = res.data.map((ride) => {
         const distance = haversine(
           ride.leavingFromLatitude,
           ride.leavingFromLongitude,
           passLatitude,
           passLongitude
-        );
-        console.log(`The distance is ${distance.toFixed(2)} km`);
+        )
+        console.log(`The distance is ${distance.toFixed(2)} km`)
         console.log(
           ride.leavingFromLatitude,
           ride.leavingFromLongitude,
           passLatitude,
           passLongitude
-        );
+        )
 
         return {
           ...ride,
           distance: distance.toFixed(2), // Update the distance property
-        };
-      });
-      console.log(updatedRidesData);
-      setRideData(updatedRidesData);
-      setAllRideData(updatedRidesData);
-      dispatch(setIdselected(1));
-    });
-  };
+        }
+      })
+      console.log(updatedRidesData)
+      setRideData(updatedRidesData)
+      setAllRideData(updatedRidesData)
+      dispatch(setIdselected(1))
+    })
+  }
   const [rideData, setRideData] = useState([
     {
       id: null,
-      name: "",
-      phone: "",
-      email: "",
-      leaving: "",
-      going: "",
+      name: '',
+      phone: '',
+      email: '',
+      leaving: '',
+      going: '',
       availableSeats: 0,
       price: 0.0,
-      carName: "",
-      carNumber: "",
-      date: "",
-      startTime: "",
-      endTime: "",
+      carName: '',
+      carNumber: '',
+      date: '',
+      startTime: '',
+      endTime: '',
     },
-  ]);
+  ])
   const op = () => {
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
-    console.log("op");
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
+    console.log('op')
     rideData.map((ride) => {
       const distance = haversine(
         ride.leavingFromLatitude,
         ride.leavingFromLongitude,
         passLatitude,
         passLongitude
-      );
+      )
       console.log(
         ride.leavingFromLatitude,
         ride.leavingFromLongitude,
         passLatitude,
         passLongitude
-      );
-      console.log(`The distance is ${distance.toFixed(2)} km`);
+      )
+      console.log(`The distance is ${distance.toFixed(2)} km`)
 
       return {
         ...ride,
         distance: distance.toFixed(2),
-      };
-    });
-  };
+      }
+    })
+  }
   useEffect(() => {
-    op();
-  }, [rideData]);
+    op()
+  }, [rideData])
   useEffect(() => {
-    f();
-  }, []);
+    f()
+  }, [])
 
-  const [leavingFromFilters, setLeavingFromFilters] = useState([]);
-  const [goingToFilters, setGoingToFilters] = useState([]);
-  let [isOpen, setIsOpen] = useState(true);
-  const [passengerLocation, setPassengerLocation] = useState("");
-  const [passLatitud, setPassLatitude] = useState();
-  const [passLongitud, setPassLongitude] = useState();
-  const [suggestions, setSuggestions] = useState([]);
+  const [leavingFromFilters, setLeavingFromFilters] = useState([])
+  const [goingToFilters, setGoingToFilters] = useState([])
+  let [isOpen, setIsOpen] = useState(true)
+  const [passengerLocation, setPassengerLocation] = useState('')
+  const [passLatitud, setPassLatitude] = useState()
+  const [passLongitud, setPassLongitude] = useState()
+  const [suggestions, setSuggestions] = useState([])
 
   useEffect(() => {
-    if (passengerLocation !== "") {
+    if (passengerLocation !== '') {
       fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${passengerLocation}&format=json&apiKey=7150d3d1879642babb4e29c827ae645b`
       )
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
+          console.log(result)
           const newSuggestions = result.results.map((item) => ({
             label: `${item.address_line1} ${item.address_line2}`,
             value: item,
-          }));
-          setSuggestions(newSuggestions);
+          }))
+          setSuggestions(newSuggestions)
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) => console.log('error', error))
     }
-  }, [passengerLocation]);
+  }, [passengerLocation])
 
   function open() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   function close() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   const handleLeavingFromcheckbox = (event) => {
-    const value = event.target.value;
+    const value = event.target.value
     setLeavingFromFilters((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value)
         : [...prev, value]
-    );
-  };
+    )
+  }
   useEffect(() => {
-    localStorage.setItem("passLati", passLatitud);
-    localStorage.setItem("passLongitude", passLongitud);
-    localStorage.setItem("passengerLocation", passengerLocation);
-    op();
-  }, [passLatitud, passLongitud]);
+    localStorage.setItem('passLati', passLatitud)
+    localStorage.setItem('passLongitude', passLongitud)
+    localStorage.setItem('passengerLocation', passengerLocation)
+    op()
+  }, [passLatitud, passLongitud])
 
   const handleGoingTocheckbox = (event) => {
-    const value = event.target.value;
+    const value = event.target.value
     setGoingToFilters((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value)
         : [...prev, value]
-    );
-  };
-  const logindata = useSelector((state) => state.loginReducer);
+    )
+  }
+  const logindata = useSelector((state) => state.loginReducer)
   const handleBookRide = () => {
-    if (logindata.email === "") {
-      alert("please login first");
+    if (logindata.email === '') {
+      alert('please login first')
     } else {
       axios
         .put(
@@ -231,114 +231,114 @@ const BookRide = () => {
         )
         .then()
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err)
+        })
       axios
         .post(
           `http://localhost:8080/app/userRideHistory/${logindata.email}/${selectedRideData.id}`
         )
         .then((response) => {
-          console.log(response);
+          console.log(response)
         })
         .catch((error) => {
-          console.log("error occured in posting a booking ride", error);
-        });
-      console.log("Ride Booked with Driver Id : ", selectedRideData.id);
-      console.log("Ride Booked By ", logindata.email);
-      f();
-      nav("/dummy");
+          console.log('error occured in posting a booking ride', error)
+        })
+      console.log('Ride Booked with Driver Id : ', selectedRideData.id)
+      console.log('Ride Booked By ', logindata.email)
+      f()
+      nav('/passengerRideHistory')
     }
-  };
+  }
   const [AllrideData, setAllRideData] = useState([
     {
       id: null,
-      name: "",
-      phone: "",
-      email: "",
-      leaving: "",
-      going: "",
+      name: '',
+      phone: '',
+      email: '',
+      leaving: '',
+      going: '',
       availableSeats: 0,
       price: 0.0,
-      carName: "",
-      carNumber: "",
-      date: "",
-      startTime: "",
-      endTime: "",
+      carName: '',
+      carNumber: '',
+      date: '',
+      startTime: '',
+      endTime: '',
     },
-  ]);
+  ])
   const [selectedRideData, setSelectedRideData] = useState({
     id: null,
-    name: "log",
-    phone: "8610528048",
-    email: "727722euit096",
-    leaving: "Bk pudur",
-    going: "adnkcjhnsd",
+    name: 'log',
+    phone: '8610528048',
+    email: '727722euit096',
+    leaving: 'Bk pudur',
+    going: 'adnkcjhnsd',
     availableSeats: 0,
     price: 0.0,
-    carName: "ducsd",
-    carNumber: "djdj",
-    date: "djdjd",
-    startTime: "jdjd",
-    endTime: "jdj",
-  });
+    carName: 'ducsd',
+    carNumber: 'djdj',
+    date: 'djdjd',
+    startTime: 'jdjd',
+    endTime: 'jdj',
+  })
 
   const handleFilterChanges = (e) => {
-    console.log("hello this is filter handle func");
+    console.log('hello this is filter handle func')
     try {
       if (leavingFromFilters.length == 0 && goingToFilters.length == 0) {
       } else {
-        const res = axios.post("http://localhost:8080/app/bookride/filter", [
+        const res = axios.post('http://localhost:8080/app/bookride/filter', [
           leavingFromFilters,
           goingToFilters,
-        ]);
+        ])
         res.then((res) => {
-          setRideData(res.data);
+          setRideData(res.data)
 
-          console.log("react data", res.data);
-        });
+          console.log('react data', res.data)
+        })
       }
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
   function haversine(lat1, lon1, lat2, lon2) {
     // Convert latitude and longitude from degrees to radians
-    const toRadians = (degree) => degree * (Math.PI / 180);
+    const toRadians = (degree) => degree * (Math.PI / 180)
 
-    lat1 = toRadians(lat1);
-    lon1 = toRadians(lon1);
-    lat2 = toRadians(lat2);
-    lon2 = toRadians(lon2);
+    lat1 = toRadians(lat1)
+    lon1 = toRadians(lon1)
+    lat2 = toRadians(lat2)
+    lon2 = toRadians(lon2)
 
     // Haversine formula
-    const dLat = lat2 - lat1;
-    const dLon = lon2 - lon1;
+    const dLat = lat2 - lat1
+    const dLon = lon2 - lon1
     const a =
       Math.sin(dLat / 2) ** 2 +
-      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
     // Earth's radius in kilometers
-    const R = 6371;
-    const distance = R * c;
+    const R = 6371
+    const distance = R * c
 
-    return distance;
+    return distance
   }
 
   useEffect(() => {
-    console.log("the store selected id is ", selectedid.idSelected);
+    console.log('the store selected id is ', selectedid.idSelected)
     try {
       const response = axios.get(
         `http://localhost:8080/app/bookride/selectedValue/${selectedid.idSelected}`
-      );
+      )
       response.then((res) => {
-        console.log(res.data);
-        setSelectedRideData(res.data);
-      });
+        console.log(res.data)
+        setSelectedRideData(res.data)
+      })
     } catch (err) {
-      console.log("error in fetching selected value", err);
+      console.log('error in fetching selected value', err)
     }
-  }, [selectedid.idSelected]);
+  }, [selectedid.idSelected])
 
   return (
     <div>
@@ -346,22 +346,22 @@ const BookRide = () => {
         <div className="containerItems">
           <button
             style={{
-              padding: "0.7vh",
-              borderRadius: "10vh",
-              fontSize: "75%",
-              backgroundColor: "white",
-              display: "flex",
-              border: "1.5px solid lightgrey",
-              paddingLeft: "1%",
-              paddingRight: "1%",
+              padding: '0.7vh',
+              borderRadius: '10vh',
+              fontSize: '75%',
+              backgroundColor: 'white',
+              display: 'flex',
+              border: '1.5px solid lightgrey',
+              paddingLeft: '1%',
+              paddingRight: '1%',
             }}
           >
             <Typography
               onClick={() => {
                 const sorted = [...rideData].sort(
                   (a, b) => a.distance - b.distance
-                );
-                setRideData(sorted);
+                )
+                setRideData(sorted)
               }}
             >
               Sort by
@@ -371,22 +371,22 @@ const BookRide = () => {
           <button className="filterButton" style={{}}>
             <Typography
               onClick={() => {
-                setOpendilog(!opendilog);
+                setOpendilog(!opendilog)
               }}
             >
               Filter
             </Typography>
             <Dialog open={opendilog} sx={{}}>
-              <div style={{ padding: "1vh" }}>
+              <div style={{ padding: '1vh' }}>
                 <label>Leaving From : </label>
                 <div
                   style={{
-                    display: "grid",
-                    justifyContent: "center",
-                    padding: "3vh",
-                    gap: "1vh",
-                    gridTemplateColumns: "auto auto auto",
-                    width: "max-content",
+                    display: 'grid',
+                    justifyContent: 'center',
+                    padding: '3vh',
+                    gap: '1vh',
+                    gridTemplateColumns: 'auto auto auto',
+                    width: 'max-content',
                   }}
                 >
                   {AllrideData.map((data) => {
@@ -399,23 +399,23 @@ const BookRide = () => {
                         ></Checkbox>
                         <label>
                           {data.locationFirstName ===
-                          "Sri Krishna College of Engineering and Technology"
-                            ? "SKCET"
+                          'Sri Krishna College of Engineering and Technology'
+                            ? 'SKCET'
                             : data.locationFirstName}
                         </label>
                       </div>
-                    );
+                    )
                   })}
                 </div>
                 <label>Going To : </label>
                 <div
                   style={{
-                    display: "grid",
-                    justifyContent: "center",
-                    padding: "3vh",
-                    gap: "1vh",
-                    gridTemplateColumns: "auto auto auto",
-                    width: "max-content",
+                    display: 'grid',
+                    justifyContent: 'center',
+                    padding: '3vh',
+                    gap: '1vh',
+                    gridTemplateColumns: 'auto auto auto',
+                    width: 'max-content',
                   }}
                 >
                   {AllrideData.map((data) => {
@@ -428,34 +428,34 @@ const BookRide = () => {
                         ></Checkbox>
                         <label>
                           {data.goingLocationFirstName ===
-                          "Sri Krishna College of Engineering and Technology"
-                            ? "SKCET"
+                          'Sri Krishna College of Engineering and Technology'
+                            ? 'SKCET'
                             : data.goingLocationFirstName}
                         </label>
                       </div>
-                    );
+                    )
                   })}
                 </div>
                 <Button
                   variant="contained"
-                  sx={{ margin: "2vh" }}
+                  sx={{ margin: '2vh' }}
                   onClick={() => {
-                    setOpendilog(false);
-                    console.log(goingToFilters);
-                    console.log(leavingFromFilters);
-                    handleFilterChanges();
+                    setOpendilog(false)
+                    console.log(goingToFilters)
+                    console.log(leavingFromFilters)
+                    handleFilterChanges()
                   }}
                 >
                   Apply filters
                 </Button>
               </div>
             </Dialog>
-            <FilterListIcon style={{ paddingLeft: "4%" }}></FilterListIcon>
+            <FilterListIcon style={{ paddingLeft: '4%' }}></FilterListIcon>
           </button>
           <Button
             onClick={open}
             variant="contained"
-            style={{ backgroundColor: "black" }}
+            style={{ backgroundColor: 'black' }}
             className=" py-2 px-4 text-sm font-medium text-white rounded-md bg-black "
           >
             Change your location
@@ -473,7 +473,7 @@ const BookRide = () => {
             </DialogTitle>
             <DialogContent className="bg-secondary p-6">
               <p className="mt-2 text-sm/6 text-primary mr-4" id="location">
-                Enter your Current Location :{" "}
+                Enter your Current Location :{' '}
                 <ThemeProvider theme={theme}>
                   <Autocomplete
                     options={suggestions}
@@ -487,9 +487,9 @@ const BookRide = () => {
                     )}
                     onChange={(event, newValue) => {
                       if (newValue) {
-                        setPassengerLocation(newValue.label);
-                        setPassLatitude(newValue.value.lat);
-                        setPassLongitude(newValue.value.lon);
+                        setPassengerLocation(newValue.label)
+                        setPassLatitude(newValue.value.lat)
+                        setPassLongitude(newValue.value.lon)
                       }
                     }}
                   />
@@ -500,12 +500,12 @@ const BookRide = () => {
               <Button
                 variant="contained"
                 // color="primary"
-                style={{ backgroundColor: "black" }}
+                style={{ backgroundColor: 'black' }}
                 className="inline-flex items-center gap-2 py-1.5 px-3 text-sm/6 font-semibold text-white"
                 onClick={() => {
-                  close();
-                  op();
-                  f();
+                  close()
+                  op()
+                  f()
                 }}
               >
                 Got it, thanks!
@@ -515,45 +515,45 @@ const BookRide = () => {
         </div>
         <Divider></Divider>
       </div>
-      <div className="content" style={{ color: "black" }}>
+      <div className="content" style={{ color: 'black' }}>
         <div className="ride-papers">
           {rideData.map((data) => {
-            return <RidePaper value={data} />;
+            return <RidePaper value={data} />
           })}
         </div>
 
         <div
           className="ride-content"
-          style={{ display: "flex", justifyContent: "space-around" }}
+          style={{ display: 'flex', justifyContent: 'space-around' }}
         >
           {selectedRideData ? (
             <div
-              style={{ display: "flex", flexDirection: "column", width: "60%" }}
+              style={{ display: 'flex', flexDirection: 'column', width: '60%' }}
             >
-              <h1 style={{ fontSize: "5vh", textAlign: "center" }}>
+              <h1 style={{ fontSize: '5vh', textAlign: 'center' }}>
                 Mon 23 JUL
               </h1>
               <img
                 src={routepng}
                 style={{
-                  width: "93%",
-                  marginTop: "10%",
-                  paddingLeft: "10%",
-                  paddingRight: "10%",
+                  width: '93%',
+                  marginTop: '10%',
+                  paddingLeft: '10%',
+                  paddingRight: '10%',
                 }}
               ></img>
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  paddingTop: "2%",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  paddingTop: '2%',
                 }}
               >
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
+                    display: 'flex',
+                    justifyContent: 'space-between',
                   }}
                 >
                   <Typography variant="h5">
@@ -561,82 +561,82 @@ const BookRide = () => {
                   </Typography>
                   <Typography variant="h5">
                     {selectedRideData.goingLocationFirstName ===
-                    "Sri Krishna College of Engineering and Technology"
-                      ? "SKCET"
+                    'Sri Krishna College of Engineering and Technology'
+                      ? 'SKCET'
                       : selectedRideData.goingLocationFirstName}
                   </Typography>
                 </div>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
+                    display: 'flex',
+                    justifyContent: 'space-between',
 
-                    paddingTop: "3%",
+                    paddingTop: '3%',
                   }}
                 >
                   <Typography
                     color="primary"
                     variant="h6"
-                    sx={{ fontSize: "110%" }}
+                    sx={{ fontSize: '110%' }}
                   >
                     {selectedRideData.startTime}
                   </Typography>
                   <Typography
                     color="primary"
                     variant="h6"
-                    sx={{ fontSize: "110%" }}
+                    sx={{ fontSize: '110%' }}
                   >
                     {selectedRideData.endTime}
                   </Typography>
                 </div>
               </div>
-              <div style={{ marginTop: "4%" }}>
+              <div style={{ marginTop: '4%' }}>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    paddingTop: "0vh",
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    paddingTop: '0vh',
                   }}
                 >
                   <Typography
                     sx={{
-                      padding: "2%",
-                      fontSize: "115%",
-                      alignContent: "center",
+                      padding: '2%',
+                      fontSize: '115%',
+                      alignContent: 'center',
                     }}
                   >
-                    Price per person{" "}
+                    Price per person{' '}
                   </Typography>
                   <Typography
                     sx={{
-                      padding: "2%",
-                      fontSize: "4vh",
-                      alignContent: "center",
+                      padding: '2%',
+                      fontSize: '4vh',
+                      alignContent: 'center',
                     }}
                   >
-                    Rs.{selectedRideData.price}{" "}
+                    Rs.{selectedRideData.price}{' '}
                   </Typography>
                 </div>
-                <Divider sx={{ paddingTop: "3%" }}></Divider>
+                <Divider sx={{ paddingTop: '3%' }}></Divider>
               </div>
-              <div style={{ paddingTop: "4%" }}>
+              <div style={{ paddingTop: '4%' }}>
                 <h1
                   style={{
-                    paddingBottom: "5dvh",
-                    textAlign: "center",
-                    fontSize: "155%",
+                    paddingBottom: '5dvh',
+                    textAlign: 'center',
+                    fontSize: '155%',
                   }}
                 >
                   Car Info
                 </h1>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignContent: "center",
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignContent: 'center',
                   }}
                 >
-                  <img style={{ height: "18dvh" }} src={car}></img>
+                  <img style={{ height: '18dvh' }} src={car}></img>
                   <div>
                     <Typography variant="h4">
                       {selectedRideData.carNumber}
@@ -647,20 +647,20 @@ const BookRide = () => {
                     <Typography
                       color="primary"
                       variant="h6"
-                      sx={{ fontSize: "110%" }}
+                      sx={{ fontSize: '110%' }}
                     >
                       {selectedRideData.availableSeats} seats available
                     </Typography>
                   </div>
                 </div>
-                <Divider sx={{ paddingTop: "3%" }}></Divider>
-                <div style={{ paddingBottom: "4%" }}>
+                <Divider sx={{ paddingTop: '3%' }}></Divider>
+                <div style={{ paddingBottom: '4%' }}>
                   <h1
                     style={{
-                      paddingBottom: "4dvh",
-                      paddingTop: "3dvh",
-                      textAlign: "center",
-                      fontSize: "155%",
+                      paddingBottom: '4dvh',
+                      paddingTop: '3dvh',
+                      textAlign: 'center',
+                      fontSize: '155%',
                     }}
                   >
                     Driver Profile
@@ -668,19 +668,19 @@ const BookRide = () => {
                 </div>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                   }}
                 >
                   <div
                     style={{
-                      width: "35%",
-                      display: "flex",
-                      justifyContent: "center",
+                      width: '35%',
+                      display: 'flex',
+                      justifyContent: 'center',
                     }}
                   >
-                    <img src={man} style={{ height: "22vh" }}></img>
+                    <img src={man} style={{ height: '22vh' }}></img>
                   </div>
                   <div>
                     <Typography variant="h4">
@@ -688,7 +688,7 @@ const BookRide = () => {
                     </Typography>
                     <Typography variant="h6">Male</Typography>
                     <Typography variant="h6">Btech IT</Typography>
-                    <Typography variant="h6" sx={{ fontSize: "115%" }}>
+                    <Typography variant="h6" sx={{ fontSize: '115%' }}>
                       {selectedRideData.email}
                     </Typography>
                   </div>
@@ -696,18 +696,18 @@ const BookRide = () => {
               </div>
               <div
                 style={{
-                  marginTop: "10%",
-                  display: "flex",
-                  justifyContent: "center",
-                  paddingTop: "2dvh",
-                  paddingBottom: "5dvh",
+                  marginTop: '10%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  paddingTop: '2dvh',
+                  paddingBottom: '5dvh',
                 }}
               >
                 <Button
                   // variant="contained"
 
                   onClick={() => {
-                    handleBookRide();
+                    handleBookRide()
                   }}
                 >
                   Book Ride
@@ -716,9 +716,9 @@ const BookRide = () => {
                   <Button
                     variant="contained"
                     style={{
-                      backgroundColor: "black",
-                      marginLeft: "10px",
-                      color: "white",
+                      backgroundColor: 'black',
+                      marginLeft: '10px',
+                      color: 'white',
                     }}
                   >
                     More Details
@@ -732,6 +732,6 @@ const BookRide = () => {
         </div>
       </div>
     </div>
-  );
-};
-export default BookRide;
+  )
+}
+export default BookRide
