@@ -9,11 +9,13 @@ import Navbar from "../oldComponents/Navbar/Navbar";
 import Dummy from "../components/Dummy";
 import SuccessSignIn from "../oldComponents/SignIn/SuccessSignin";
 import Sample from "./CreateRide/Sample";
+import RideAssistant from "./CHAT_BOT/EcoRideAsst";
 
 const App = () => {
   return (
     <Router>
       <Navbar />
+      <RideAssistant />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/createRide" element={<CreateRide />} />
