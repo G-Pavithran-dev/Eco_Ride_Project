@@ -7,7 +7,7 @@ import {
   TableHead,
   TableRow,
   Typography,
-  TableContainer
+  TableContainer,
 } from "@mui/material";
 import Navbar from "../NavBar/NavBar";
 import route from "./Route2.png";
@@ -30,26 +30,42 @@ const PilotsRideHistory = () => {
   const [upcomingRideHistory, setUpcomingRideHistory] = useState([]);
   const [onGoingRideHistory, setOnGoingRideHistory] = useState([]);
   const [onCompletedRideHistory, setCompletedRideHistory] = useState([]);
-  
+
   const [DriverRides, setDriverRides] = useState([]);
   const data = [
-    { name: 'John Doe', email: 'john.doe@example.com', department: 'Engineering', dropLocation: 'Location A' },
-    { name: 'Jane Smith', email: 'jane.smith@example.com', department: 'Marketing', dropLocation: 'Location B' },
-    { name: 'John Doe', email: 'john.doe@example.com', department: 'Engineering', dropLocation: 'Location A' },
-    { name: 'Jane Smith', email: 'jane.smith@example.com', department: 'Marketing', dropLocation: 'Location B' },
+    {
+      name: "John Doe",
+      email: "john.doe@example.com",
+      department: "Engineering",
+      dropLocation: "Location A",
+    },
+    {
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      department: "Marketing",
+      dropLocation: "Location B",
+    },
+    {
+      name: "John Doe",
+      email: "john.doe@example.com",
+      department: "Engineering",
+      dropLocation: "Location A",
+    },
+    {
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      department: "Marketing",
+      dropLocation: "Location B",
+    },
     // Add more data as needed
   ];
- 
 
   const getall = () => {
     console.log("hello");
     axios
-      .get(
-        
-        `http://localhost:8080/app/bookride/Driver/${logindata.email}`
-      )
+      .get(`http://localhost:8080/app/bookride/Driver/${logindata.email}`)
       .then((res) => {
-        console.log("jdjdj",res.data);
+        console.log("jdjdj", res.data);
         setDriverRides(res.data);
       })
       .catch((err) => {
@@ -60,13 +76,13 @@ const PilotsRideHistory = () => {
         `http://localhost:8080/app/userRideHistory/getDriverByemail/${logindata.email}/upcoming`
       )
       .then((res) => {
-        console.log("Drivers history upcominPassengers",res.data);
+        console.log("Drivers history upcominPassengers", res.data);
         setUpcomingRideHistory(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-      axios
+    axios
       .get(
         `http://localhost:8080/app/userRideHistory/getDriverByemail/${logindata.email}/ongoing`
       )
@@ -77,39 +93,23 @@ const PilotsRideHistory = () => {
         console.log(err);
       });
 
-
-
-
-
-
-
-
-
-
-      axios
+    axios
       .get(
         `http://localhost:8080/app/userRideHistory/getAllRideID/completed/${logindata.email}`
       )
       .then((res) => {
-        axios.post( `http://localhost:8080/app/bookRide/getALLRide/Byid`,res.data).then((response)=>{
-          
-          console.log("rwstyaujklskdjhgeeyujhneduj",response.data);
-          setCompletedRideHistory(response.data);
-
-        })
+        axios
+          .post(`http://localhost:8080/app/bookRide/getALLRide/Byid`, res.data)
+          .then((response) => {
+            console.log("rwstyaujklskdjhgeeyujhneduj", response.data);
+            setCompletedRideHistory(response.data);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
 
-
-
-
-
-
-
-
-      
+    console.log("hi this is logesh ", onCompletedRideHistory);
   };
 
   useEffect(() => {
@@ -183,11 +183,21 @@ const PilotsRideHistory = () => {
                         </Typography>
                         <img
                           src={routedot}
-                          style={{ height: "48%", alignContent: "center" ,padding:"1%"}}
+                          style={{
+                            height: "48%",
+                            alignContent: "center",
+                            padding: "1%",
+                          }}
                           alt="Route"
                         />
                         <Typography variant="h5" sx={{ fontSize: "0.8rem" }}>
-                          {ride.going}
+                          <Typography variant="h5" sx={{ fontSize: "0.8rem" }}>
+                            {" "}
+                            {ride.going ===
+                            "Sri Krishna College of Engineering and Technology Sri Krishna College Road, Kovaipudur, Madukkarai - 641105, TN, India"
+                              ? "SKCET"
+                              : ride.going}
+                          </Typography>
                         </Typography>
                       </div>
 
@@ -289,7 +299,9 @@ const PilotsRideHistory = () => {
               value="OnGoing"
               className="overflow-y-scroll h-[70dvh]"
             >
-               {DriverRides && DriverRides.length > 0 && onGoingRideHistory.length>0? (
+              {DriverRides &&
+              DriverRides.length > 0 &&
+              onGoingRideHistory.length > 0 ? (
                 DriverRides.map((ride) => (
                   <div
                     style={{
@@ -301,20 +313,18 @@ const PilotsRideHistory = () => {
                     <h1 style={{ fontSize: "5vh", textAlign: "center" }}>
                       Mon 23 JUL
                     </h1>
-                    <div style={{display:"flex",justifyContent:"center"}}>
-
-                    <img
-                      src={route}
-                      style={{
-                        width: "60%",
-                        marginTop: "7%",
-                        marginBottom: "3%",
-                        paddingLeft: "10%",
-                        paddingRight: "10%",
-                        
-                      }}
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <img
+                        src={route}
+                        style={{
+                          width: "60%",
+                          marginTop: "7%",
+                          marginBottom: "3%",
+                          paddingLeft: "10%",
+                          paddingRight: "10%",
+                        }}
                       ></img>
-                      </div>
+                    </div>
                     <div
                       style={{
                         display: "flex",
@@ -326,11 +336,21 @@ const PilotsRideHistory = () => {
                         style={{
                           display: "flex",
                           justifyContent: "space-evenly",
-
                         }}
                       >
-                         <Typography variant="h5">{ride.locationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.locationFirstName} </Typography>
-                         <Typography variant="h5"> {ride.goingLocationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.goingLocationFirstName}</Typography>
+                        <Typography variant="h5">
+                          {ride.locationFirstName ===
+                          "Sri Krishna College of Engineering and Technology Sri Krishna College Road, Kovaipudur, Madukkarai - 641105, TN, India"
+                            ? "SKCET"
+                            : ride.locationFirstName}{" "}
+                        </Typography>
+                        <Typography variant="h5">
+                          {" "}
+                          {ride.goingLocationFirstName ===
+                          "Sri Krishna College of Engineering and Technology Sri Krishna College Road, Kovaipudur, Madukkarai - 641105, TN, India"
+                            ? "SKCET"
+                            : ride.goingLocationFirstName}
+                        </Typography>
                       </div>
                       <div
                         style={{
@@ -357,12 +377,16 @@ const PilotsRideHistory = () => {
                       </div>
                     </div>
                     <div style={{ marginTop: "4%" }}>
-                      
                       <Divider sx={{ paddingTop: "3%" }}></Divider>
                     </div>
                     <div style={{ paddingTop: "4%" }}>
                       <h1
-                        style={{ paddingBottom: "5dvh", textAlign: "center",fontSize:"200%",fontWeight:"600" }}
+                        style={{
+                          paddingBottom: "5dvh",
+                          textAlign: "center",
+                          fontSize: "200%",
+                          fontWeight: "600",
+                        }}
                       >
                         Car Info
                       </h1>
@@ -393,55 +417,76 @@ const PilotsRideHistory = () => {
                             paddingBottom: "2dvh",
                             paddingTop: "3dvh",
                             textAlign: "center",
-                            fontSize:"200%",
-                            fontWeight:"500"
+                            fontSize: "200%",
+                            fontWeight: "500",
                           }}
                         >
                           Passengers
                         </h1>
                       </div>
-                      <div style={{display:"flex",justifyContent:'center',alignContent:"center",flexDirection:"column",alignItems:"center",paddingBottom:"8%"}}>
-
-                      <TableContainer  sx={{width:"80%"}}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{fontWeight:"700"}}>Name</TableCell>
-            <TableCell sx={{fontWeight:"700"}}>Email</TableCell>
-            <TableCell sx={{fontWeight:"700"}}>Department</TableCell>
-            <TableCell sx={{fontWeight:"700"}}>Drop Location</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {onGoingRideHistory.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell >{row.userDetails.firstName} {row.userDetails.lastName}</TableCell>
-              <TableCell>{row.userDetails.email}</TableCell>
-              <TableCell>{row.userDetails.department}</TableCell>
-              <TableCell>{row.bookRide.going}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <div style={{paddingTop:"5%"}}>
-      <Button 
-      onClick={() => {
-        axios.put(
-          `http://localhost:8080/app/updateRide/ById/${DriverRides[0].id}/completed`
-        ).then(()=>{
-
-          getall();
-        });
-      }}
-      >Ride Completed</Button>
-    </div>
-<div>
-                  </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          paddingBottom: "8%",
+                        }}
+                      >
+                        <TableContainer sx={{ width: "80%" }}>
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Name
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Email
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Department
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Drop Location
+                                </TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {onGoingRideHistory.map((row, index) => (
+                                <TableRow key={index}>
+                                  <TableCell>
+                                    {row.userDetails.firstName}{" "}
+                                    {row.userDetails.lastName}
+                                  </TableCell>
+                                  <TableCell>{row.userDetails.email}</TableCell>
+                                  <TableCell>
+                                    {row.userDetails.department}
+                                  </TableCell>
+                                  <TableCell>{row.bookRide.going}</TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                        <div style={{ paddingTop: "5%" }}>
+                          <Button
+                            onClick={() => {
+                              axios
+                                .put(
+                                  `http://localhost:8080/app/updateRide/ById/${DriverRides[0].id}/completed`
+                                )
+                                .then(() => {
+                                  getall();
+                                });
+                            }}
+                          >
+                            Ride Completed
+                          </Button>
+                        </div>
+                        <div></div>
                       </div>
-
                     </div>
-                    
                   </div>
                   // style={{display:"flex",flexDirection:"column",justifyContent:"space-between",alignItems:"center"
                 ))
@@ -455,7 +500,9 @@ const PilotsRideHistory = () => {
               value="UpComing"
               className="overflow-y-scroll h-[70dvh]"
             >
-              {DriverRides && DriverRides.length > 0 && upcomingRideHistory.length>0? (
+              {DriverRides &&
+              DriverRides.length > 0 &&
+              upcomingRideHistory.length > 0 ? (
                 DriverRides.map((ride) => (
                   <div
                     style={{
@@ -467,20 +514,18 @@ const PilotsRideHistory = () => {
                     <h1 style={{ fontSize: "5vh", textAlign: "center" }}>
                       Mon 23 JUL
                     </h1>
-                    <div style={{display:"flex",justifyContent:"center"}}>
-
-                    <img
-                      src={route}
-                      style={{
-                        width: "60%",
-                        marginTop: "7%",
-                        marginBottom: "3%",
-                        paddingLeft: "10%",
-                        paddingRight: "10%",
-                        
-                      }}
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <img
+                        src={route}
+                        style={{
+                          width: "60%",
+                          marginTop: "7%",
+                          marginBottom: "3%",
+                          paddingLeft: "10%",
+                          paddingRight: "10%",
+                        }}
                       ></img>
-                      </div>
+                    </div>
                     <div
                       style={{
                         display: "flex",
@@ -492,11 +537,21 @@ const PilotsRideHistory = () => {
                         style={{
                           display: "flex",
                           justifyContent: "space-evenly",
-
                         }}
                       >
-                        <Typography variant="h5">{ride.locationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.locationFirstName} </Typography>
-                        <Typography variant="h5"> {ride.goingLocationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.goingLocationFirstName}</Typography>
+                        <Typography variant="h5">
+                          {ride.locationFirstName ===
+                          "Sri Krishna College of Engineering and Technology"
+                            ? "SKCET"
+                            : ride.locationFirstName}{" "}
+                        </Typography>
+                        <Typography variant="h5">
+                          {" "}
+                          {ride.goingLocationFirstName ===
+                          "Sri Krishna College of Engineering and Technology"
+                            ? "SKCET"
+                            : ride.goingLocationFirstName}
+                        </Typography>
                       </div>
                       <div
                         style={{
@@ -523,12 +578,16 @@ const PilotsRideHistory = () => {
                       </div>
                     </div>
                     <div style={{ marginTop: "4%" }}>
-                      
                       <Divider sx={{ paddingTop: "3%" }}></Divider>
                     </div>
                     <div style={{ paddingTop: "4%" }}>
                       <h1
-                        style={{ paddingBottom: "5dvh", textAlign: "center",fontSize:"200%",fontWeight:"600" }}
+                        style={{
+                          paddingBottom: "5dvh",
+                          textAlign: "center",
+                          fontSize: "200%",
+                          fontWeight: "600",
+                        }}
                       >
                         Car Info
                       </h1>
@@ -559,57 +618,76 @@ const PilotsRideHistory = () => {
                             paddingBottom: "2dvh",
                             paddingTop: "3dvh",
                             textAlign: "center",
-                            fontSize:"200%",
-                            fontWeight:"500"
+                            fontSize: "200%",
+                            fontWeight: "500",
                           }}
                         >
                           Passengers
                         </h1>
                       </div>
-                      <div style={{display:"flex",justifyContent:'center',alignContent:"center",flexDirection:"column",alignItems:"center",paddingBottom:"8%"}}>
-
-                      <TableContainer  sx={{width:"80%"}}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{fontWeight:"700"}}>Name</TableCell>
-            <TableCell sx={{fontWeight:"700"}}>Email</TableCell>
-            <TableCell sx={{fontWeight:"700"}}>Department</TableCell>
-            <TableCell sx={{fontWeight:"700"}}>Drop Location</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {upcomingRideHistory.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell >{row.userDetails.firstName} {row.userDetails.lastName}</TableCell>
-              <TableCell>{row.userDetails.email}</TableCell>
-              <TableCell>{row.userDetails.department}</TableCell>
-              <TableCell>{row.bookRide.going}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <div style={{paddingTop:"5%"}}>
-      <Button 
-      onClick={() => {
-        axios.put(
-          `http://localhost:8080/app/updateRide/ById/${DriverRides[0].id}/ongoing`
-        ).then(()=>{
-
-          getall();
-        }
-
-        );
-      }}
-      >Start Ride</Button>
-    </div>
-<div>
-                  </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          paddingBottom: "8%",
+                        }}
+                      >
+                        <TableContainer sx={{ width: "80%" }}>
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Name
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Email
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Department
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: "700" }}>
+                                  Drop Location
+                                </TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {upcomingRideHistory.map((row, index) => (
+                                <TableRow key={index}>
+                                  <TableCell>
+                                    {row.userDetails.firstName}{" "}
+                                    {row.userDetails.lastName}
+                                  </TableCell>
+                                  <TableCell>{row.userDetails.email}</TableCell>
+                                  <TableCell>
+                                    {row.userDetails.department}
+                                  </TableCell>
+                                  <TableCell>{row.bookRide.going}</TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                        <div style={{ paddingTop: "5%" }}>
+                          <Button
+                            onClick={() => {
+                              axios
+                                .put(
+                                  `http://localhost:8080/app/updateRide/ById/${DriverRides[0].id}/ongoing`
+                                )
+                                .then(() => {
+                                  getall();
+                                });
+                            }}
+                          >
+                            Start Ride
+                          </Button>
+                        </div>
+                        <div></div>
                       </div>
-
                     </div>
-                    
                   </div>
                   // style={{display:"flex",flexDirection:"column",justifyContent:"space-between",alignItems:"center"
                 ))

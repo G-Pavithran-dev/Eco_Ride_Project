@@ -20,6 +20,7 @@ const Footer = () => {
             <a className="my-3 block" href="/#">
               Documentation <span className="text-secondary text-xs p-1"></span>
             </a>
+          
             <a className="my-3 block" href="/#">
               Tutorials <span className="text-secondary text-xs p-1"></span>
             </a>

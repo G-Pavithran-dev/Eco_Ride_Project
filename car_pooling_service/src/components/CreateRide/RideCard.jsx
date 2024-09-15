@@ -143,7 +143,6 @@ const RideCard = () => {
             icon: "success",
             title: "Success",
             text: "Ride details submitted successfully!",
-            timer: 2000,
           });
         })
         .catch((error) => {

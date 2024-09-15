@@ -1,57 +1,58 @@
-import { AppBar, Toolbar, Typography } from '@mui/material'
-import { Link, NavLink } from 'react-router-dom'
-import { CalendarDays } from 'lucide-react'
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Link, NavLink } from "react-router-dom";
+import { CalendarDays } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/components/ui/hover-card'
-import { Moon, Sun } from 'lucide-react'
+} from "@/components/ui/hover-card";
+import { Moon, Sun } from "lucide-react";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { useTheme } from '../ThemeProvider'
+} from "@/components/ui/dropdown-menu";
+import { useTheme } from "../ThemeProvider";
 
 const Navbar = () => {
-  const { setTheme } = useTheme()
+  const { setTheme } = useTheme();
 
   return (
     <AppBar position="sticky" elevation={1}>
       <Toolbar
         sx={{
-          backgroundColor: 'white',
-          color: 'black',
-          display: 'flex',
-          justifyContent: 'space-around',
-          lineHeight: '1rem',
+          backgroundColor: "white",
+          color: "black",
+          display: "flex",
+          justifyContent: "space-around",
+          lineHeight: "0.5rem",
         }}
       >
         <Link to="/" className="logo">
-          <p className="font-serif text-2xl font-bold text-gray-800 uppercase tracking-wide m-0 p-2">
-            Eco Ride
-          </p>
+          <img
+            src="/images/eco-ride.png"
+            style={{ width: "6.5rem", height: "2rem" }}
+          />
         </Link>
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            width: '20%',
-            marginLeft: '8%',
-            marginRight: '8%',
+            display: "flex",
+            justifyContent: "space-around",
+            width: "20%",
+            marginLeft: "8%",
+            marginRight: "8%",
           }}
         ></div>
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            width: '15%',
+            display: "flex",
+            justifyContent: "space-around",
+            width: "25%",
           }}
         >
           <HoverCard>
@@ -66,18 +67,15 @@ const Navbar = () => {
                 className="block mb-2 hover:bg-blue-100 p-2  rounded"
               >
                 <Typography
-                  sx={{ fontWeight: '550' }}
+                  sx={{ fontWeight: "550" }}
                   className="text-primary mb-4"
                 >
                   As Pilot
                 </Typography>
               </Link>
               <div className="border-t border-primary my-2"></div>
-              <Link
-                to="/passengerRideHistory"
-                className="block hover:bg-blue-100 p-2 rounded"
-              >
-                <Typography sx={{ fontWeight: '550' }} className="text-primary">
+              <Link to="/dummy" className="block hover:bg-blue-100 p-2 rounded">
+                <Typography sx={{ fontWeight: "550" }} className="text-primary">
                   As Passenger
                 </Typography>
               </Link>
@@ -96,28 +94,50 @@ const Navbar = () => {
                 className="block mb-2 hover:bg-blue-100 p-2  rounded"
               >
                 <Typography
-                  sx={{ fontWeight: '550' }}
+                  sx={{ fontWeight: "550" }}
                   className="text-primary mb-4"
                 >
                   Login
                 </Typography>
               </Link>
+              
               <div className="border-t border-primary my-2"></div>
               <Link
                 to="/passangerSignup"
                 className="block hover:bg-blue-100 p-2 rounded"
               >
-                <Typography sx={{ fontWeight: '550' }} className="text-primary">
+                <Typography sx={{ fontWeight: "550" }} className="text-primary">
                   SignUp
                 </Typography>
               </Link>
+              
             </HoverCardContent>
+            <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <span className="sr-only">Toggle theme</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setTheme("light")}>
+                Light
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("dark")}>
+                Dark
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme("system")}>
+                System
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           </HoverCard>
           {/* <- */}
         </div>
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

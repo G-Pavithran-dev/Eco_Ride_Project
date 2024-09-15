@@ -28,7 +28,7 @@ public class MailService {
                 + "<p>If you have any questions, feel free to reach out to us at any time. We're here to help!</p>"
                 + "<p>Happy Riding,<br>Team Eco Ride.</p>";
 
-        message.setFrom("7b8f46001@smtp-brevo.com");
+        message.setFrom("noreply@ecoride.com");
         message.setTo(email);
         message.setSubject("Welcome to Eco Ride");
         message.setText(htmlBody);
