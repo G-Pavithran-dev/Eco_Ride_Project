@@ -342,348 +342,229 @@ const BookRide = () => {
 
   return (
     <div>
-      <div className="sortingContainer">
-        <div className="containerItems">
-        <button className="py-[0.7vh] rounded-[10vh] text-[75%] bg-white flex border border-gray-300 pl-4 pr-4">
-
-            <Typography
-              onClick={() => {
-                const sorted = [...rideData].sort(
-                  (a, b) => a.distance - b.distance
-                );
-                setRideData(sorted);
-              }}
-            >
-              Sort by
-            </Typography>
-            <KeyboardArrowDownIcon></KeyboardArrowDownIcon>
-          </button>
-          <button className="filterButton" style={{}}>
-            <Typography
-              onClick={() => {
-                setOpendilog(!opendilog);
-              }}
-            >
-              Filter
-            </Typography>
-            <Dialog open={opendilog} sx={{}}>
-              <div className="p-4">
-                <label className="font-medium">Leaving From : </label>
-                <div className="grid justify-center p-[3vh] gap-[1vh] grid-cols-[auto_auto_auto] w-max">
-                  {AllrideData.map((data) => {
-                    return (
-                      <div>
-                        <Checkbox
-                          value={data.leaving}
-                          checked={leavingFromFilters.includes(data.leaving)}
-                          onChange={handleLeavingFromcheckbox}
-                        ></Checkbox>
-                        <label>
-                          {data.locationFirstName ===
-                          "Sri Krishna College of Engineering and Technology"
-                            ? "SKCET"
-                            : data.locationFirstName}
-                        </label>
-                      </div>
-                    );
-                  })}
-                </div>
-                <label className="font-medium">Going To : </label>
-                <div className="grid justify-center p-[3dvh] gap-1vh grid-cols-[auto_auto_auto] w-max">
-
-                  {AllrideData.map((data) => {
-                    return (
-                      <div>
-                        <Checkbox
-                          value={data.going}
-                          checked={goingToFilters.includes(data.going)}
-                          onChange={handleGoingTocheckbox}
-                        ></Checkbox>
-                        <label>
-                          {data.goingLocationFirstName ===
-                          "Sri Krishna College of Engineering and Technology"
-                            ? "SKCET"
-                            : data.goingLocationFirstName}
-                        </label>
-                      </div>
-                    );
-                  })}
-                </div>
-                <Button className="h-5 mt-7 p-5"
-        
-        
-                  onClick={() => {
-                    setOpendilog(false);
-                    console.log(goingToFilters);
-                    console.log(leavingFromFilters);
-                    handleFilterChanges();
-                  }}
-                >
-                  Apply filters
-                </Button>
+    <div className="sortingContainer">
+      <div className="containerItems">
+        <button className="py-[0.7vh] rounded-[10vh] text-[75%] bg-white flex border border-gray-300 pl-4 pr-4 md:py-2 md:text-sm">
+          <Typography
+            onClick={() => {
+              const sorted = [...rideData].sort((a, b) => a.distance - b.distance);
+              setRideData(sorted);
+            }}
+          >
+            Sort by
+          </Typography>
+          <KeyboardArrowDownIcon />
+        </button>
+  
+        <button className="filterButton">
+          <Typography
+            onClick={() => {
+              setOpendilog(!opendilog);
+            }}
+          >
+            Filter
+          </Typography>
+          <Dialog open={opendilog}>
+            <div className="p-4">
+              <label className="font-medium">Leaving From: </label>
+              <div className="grid justify-center p-[3vh] gap-[1vh] grid-cols-[auto_auto_auto] w-max md:grid-cols-1">
+                {AllrideData.map((data) => (
+                  <div>
+                    <Checkbox
+                      value={data.leaving}
+                      checked={leavingFromFilters.includes(data.leaving)}
+                      onChange={handleLeavingFromcheckbox}
+                    />
+                    <label>
+                      {data.locationFirstName ===
+                      "Sri Krishna College of Engineering and Technology"
+                        ? "SKCET"
+                        : data.locationFirstName}
+                    </label>
+                  </div>
+                ))}
               </div>
-            </Dialog>
-            <FilterListIcon className="p-1"></FilterListIcon>
-          </button>
-          <Button
-            onClick={open}
-            className=" py-2 px-4 text-sm font-medium text-white rounded-md bg-black "
-          >
-            Change your location
-          </Button>
-
-          <Dialog
-            open={isOpen}
-            onClose={close}
-            className="rounded-lg"
-            maxWidth="xs" // You can use 'xs', 'sm', 'md', 'lg', 'xl' or a custom value
-            fullWidth={true}
-          >
-            <DialogTitle className="text-base/7 font-medium text-primary">
-              Current Location:
-            </DialogTitle>
-            <DialogContent className="bg-secondary p-6">
-              <p className="mt-2 text-sm/6 text-primary mr-4" id="location">
-                Enter your Current Location :{" "}
-                <ThemeProvider theme={theme}>
-                  <Autocomplete
-                    options={suggestions}
-                    getOptionLabel={(option) => option.label}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="outlined"
-                        onChange={(e) => setPassengerLocation(e.target.value)}
-                      />
-                    )}
-                    onChange={(event, newValue) => {
-                      if (newValue) {
-                        setPassengerLocation(newValue.label);
-                        setPassLatitude(newValue.value.lat);
-                        setPassLongitude(newValue.value.lon);
-                      }
-                    }}
-                  />
-                </ThemeProvider>
-              </p>
-            </DialogContent>
-            <DialogActions>
+              <label className="font-medium">Going To: </label>
+              <div className="grid justify-center p-[3vh] gap-[1vh] grid-cols-[auto_auto_auto] w-max md:grid-cols-1">
+                {AllrideData.map((data) => (
+                  <div>
+                    <Checkbox
+                      value={data.going}
+                      checked={goingToFilters.includes(data.going)}
+                      onChange={handleGoingTocheckbox}
+                    />
+                    <label>
+                      {data.goingLocationFirstName ===
+                      "Sri Krishna College of Engineering and Technology"
+                        ? "SKCET"
+                        : data.goingLocationFirstName}
+                    </label>
+                  </div>
+                ))}
+              </div>
               <Button
-                variant="contained"
-                // color="primary"
-                style={{ backgroundColor: "black" }}
-                className="inline-flex items-center gap-2 py-1.5 px-3 text-sm/6 font-semibold text-white"
+                className="h-5 mt-7 p-5"
                 onClick={() => {
-                  close();
-                  op();
-                  f();
+                  setOpendilog(false);
+                  console.log(goingToFilters);
+                  console.log(leavingFromFilters);
+                  handleFilterChanges();
                 }}
               >
-                Got it, thanks!
+                Apply filters
               </Button>
-            </DialogActions>
+            </div>
           </Dialog>
-        </div>
-        <Divider></Divider>
-      </div>
-      <div className="content" style={{ color: "black" }}>
-        <div className="ride-papers">
-          {rideData.map((data) => {
-            return <RidePaper value={data} />;
-          })}
-        </div>
-
-        <div
-          className="ride-content flex justify-around"
-          
+          <FilterListIcon className="p-1" />
+        </button>
+  
+        <Button
+          onClick={open}
+          className="py-2 px-4 text-sm font-medium text-white rounded-md bg-black"
         >
-          {selectedRideData ? (
-            <div className="flex flex-col w-[60%]">
-       
-              <h1 className="text-[2.3rem]  text-center">
-                Mon 23 JUL
-              </h1>
-              <img
-                src={routepng}
-                className="w-[93%] mt-[10%] pl-[10%] pr-[10%]"
-              ></img>
-              <div
-                 className="flex flex-col justify-between pt-[2%]"
-              >
-                <div className="flex justify-between"
-                >
-                  <Typography variant="h5">
-                    {selectedRideData.locationFirstName}
-                  </Typography>
-                  <Typography variant="h5">
-                    {selectedRideData.goingLocationFirstName ===
-                    "Sri Krishna College of Engineering and Technology"
-                      ? "SKCET"
-                      : selectedRideData.goingLocationFirstName}
-                  </Typography>
-                </div>
-                <div
-                  className="flex justify-between pt-[3%]"
-                >
-                  <Typography
-                    color="primary"
-                    variant="h6"
-                    className="font-[110%]"
-                    sx={{ fontSize: "110%" }}
-                  >
-                    {selectedRideData.startTime}
-                  </Typography>
-                  <Typography
-                    color="primary"
-                    variant="h6"
-                    sx={{ fontSize: "110%" }}
-                  >
-                    {selectedRideData.endTime}
-                  </Typography>
-                </div>
+          Change your location
+        </Button>
+  
+        <Dialog open={isOpen} onClose={close} className="rounded-lg" maxWidth="xs" fullWidth={true}>
+          <DialogTitle className="text-base/7 font-medium text-primary">
+            Current Location:
+          </DialogTitle>
+          <DialogContent className="bg-secondary p-6">
+            <p className="mt-2 text-sm/6 text-primary mr-4" id="location">
+              Enter your Current Location:{" "}
+              <ThemeProvider theme={theme}>
+                <Autocomplete
+                  options={suggestions}
+                  getOptionLabel={(option) => option.label}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      onChange={(e) => setPassengerLocation(e.target.value)}
+                    />
+                  )}
+                  onChange={(event, newValue) => {
+                    if (newValue) {
+                      setPassengerLocation(newValue.label);
+                      setPassLatitude(newValue.value.lat);
+                      setPassLongitude(newValue.value.lon);
+                    }
+                  }}
+                />
+              </ThemeProvider>
+            </p>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: "black" }}
+              className="inline-flex items-center gap-2 py-1.5 px-3 text-sm/6 font-semibold text-white"
+              onClick={() => {
+                close();
+                op();
+                f();
+              }}
+            >
+              Got it, thanks!
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+      <Divider />
+    </div>
+  
+    <div className="content text-black">
+      <div className="ride-papers">
+        {rideData.map((data) => {
+          return <RidePaper value={data} />;
+        })}
+      </div>
+  
+      <div className="ride-content flex flex-col md:flex-row justify-around">
+        {selectedRideData ? (
+          <div className="flex flex-col w-[100%] md:w-[60%]">
+            <h1 className="text-[1.5rem] md:text-[2.3rem] text-center">
+              Mon 23 JUL
+            </h1>
+            <img
+              src={routepng}
+              className="w-[100%] mt-[5%] md:mt-[10%] pl-[10%] pr-[10%]"
+            />
+            <div className="flex flex-col justify-between pt-[2%]">
+              <div className="flex justify-between">
+                <Typography variant="h5">{selectedRideData.locationFirstName}</Typography>
+                <Typography variant="h5">
+                  {selectedRideData.goingLocationFirstName ===
+                  "Sri Krishna College of Engineering and Technology"
+                    ? "SKCET"
+                    : selectedRideData.goingLocationFirstName}
+                </Typography>
               </div>
-              <div style={{ marginTop: "4%" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    paddingTop: "0vh",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      padding: "2%",
-                      fontSize: "115%",
-                      alignContent: "center",
-                    }}
-                  >
-                    Price per person{" "}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      padding: "2%",
-                      fontSize: "4vh",
-                      alignContent: "center",
-                    }}
-                  >
-                    Rs.{selectedRideData.price}{" "}
-                  </Typography>
-                </div>
-                <Divider sx={{ paddingTop: "3%" }}></Divider>
-              </div>
-              <div style={{ paddingTop: "4%" }}>
-                <h1
-                  style={{
-                    paddingBottom: "5dvh",
-                    textAlign: "center",
-                    fontSize: "155%",
-                  }}
-                >
-                  Car Info
-                </h1>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignContent: "center",
-                  }}
-                >
-                  <img style={{ height: "18dvh" }} src={car}></img>
-                  <div>
-                    <Typography variant="h4">
-                      {selectedRideData.carNumber}
-                    </Typography>
-                    <Typography variant="h6">
-                      {selectedRideData.carName}
-                    </Typography>
-                    <Typography
-                      color="primary"
-                      variant="h6"
-                      sx={{ fontSize: "110%" }}
-                    >
-                      {selectedRideData.availableSeats} seats available
-                    </Typography>
-                  </div>
-                </div>
-                <Divider sx={{ paddingTop: "3%" }}></Divider>
-                <div style={{ paddingBottom: "4%" }}>
-                  <h1
-                    style={{
-                      paddingBottom: "4dvh",
-                      paddingTop: "3dvh",
-                      textAlign: "center",
-                      fontSize: "155%",
-                    }}
-                  >
-                    Driver Profile
-                  </h1>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "35%",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <img src={man} style={{ height: "22vh" }}></img>
-                  </div>
-                  <div>
-                    <Typography variant="h4">
-                      {selectedRideData.name}
-                    </Typography>
-                    <Typography variant="h6">Male</Typography>
-                    <Typography variant="h6">Btech IT</Typography>
-                    <Typography variant="h6" sx={{ fontSize: "115%" }}>
-                      {selectedRideData.email}
-                    </Typography>
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  marginTop: "10%",
-                  display: "flex",
-                  justifyContent: "center",
-                  paddingTop: "2dvh",
-                  paddingBottom: "5dvh",
-                }}
-              >
-                <Button
-                  // variant="contained"
-
-                  onClick={() => {
-                    handleBookRide();
-                  }}
-                >
-                  Book Ride
-                </Button>
-                <Link to="/map">
-                  <Button
-                    variant="contained"
-                    style={{
-                      backgroundColor: "black",
-                      marginLeft: "10px",
-                      color: "white",
-                    }}
-                  >
-                    More Details
-                  </Button>
-                </Link>
+              <div className="flex justify-between pt-[3%]">
+                <Typography color="primary" variant="h6" className="font-[110%]" sx={{ fontSize: "110%" }}>
+                  {selectedRideData.startTime}
+                </Typography>
+                <Typography color="primary" variant="h6" sx={{ fontSize: "110%" }}>
+                  {selectedRideData.endTime}
+                </Typography>
               </div>
             </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
+            <div className="mt-[4%]">
+              <div className="flex justify-between">
+                <Typography sx={{ padding: "2%", fontSize: "115%" }}>Price per person</Typography>
+                <Typography sx={{ padding: "2%", fontSize: "4vh" }}>Rs.{selectedRideData.price}</Typography>
+              </div>
+              <Divider sx={{ paddingTop: "3%" }} />
+            </div>
+  
+            <div className="mt-[4%]">
+              <h1 className="text-center text-[155%] pb-[5dvh]">Car Info</h1>
+              <div className="flex justify-between">
+                <img style={{ height: "18dvh" }} src={car} />
+                <div>
+                  <Typography variant="h4">{selectedRideData.carNumber}</Typography>
+                  <Typography variant="h6">{selectedRideData.carName}</Typography>
+                  <Typography color="primary" variant="h6" sx={{ fontSize: "110%" }}>
+                    {selectedRideData.availableSeats} seats available
+                  </Typography>
+                </div>
+              </div>
+              <Divider sx={{ paddingTop: "3%" }} />
+            </div>
+  
+            <div className="mt-[4%]">
+              <h1 className="text-center text-[155%]">Driver Profile</h1>
+              <div className="flex justify-between items-center">
+                <div className="w-[35%] flex justify-center">
+                  <img src={man} style={{ height: "22vh" }} />
+                </div>
+                <div>
+                  <Typography variant="h4">{selectedRideData.name}</Typography>
+                  <Typography variant="h6">Male</Typography>
+                  <Typography variant="h6">Btech IT</Typography>
+                  <Typography variant="h6" sx={{ fontSize: "115%" }}>
+                    {selectedRideData.email}
+                  </Typography>
+                </div>
+              </div>
+            </div>
+  
+            <div className="mt-[10%] flex justify-center">
+              <Button onClick={handleBookRide}>Book Ride</Button>
+              <Link to="/map">
+                <Button variant="contained" style={{ backgroundColor: "black", marginLeft: "10px", color: "white" }}>
+                  More Details
+                </Button>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
+  </div>
+  
   );
 };
 export default BookRide;
