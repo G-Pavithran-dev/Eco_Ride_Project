@@ -25,19 +25,30 @@ import RiderSignUp from "./components/RiderAuthorization/RiderSignUp";
 import Footer from "./components/Footer/Footer.jsx";
 import Map from "./components/Map/Map.jsx";
 import MyModal from "./components/DialogueBox/Dialogue.jsx";
+import AdminDasboard from "./components/Admin/AdminDashboard/AdminDasboard.jsx";
+import { useEffect, useState } from "react";
 // import GetStarted from './components/getStartedPage/GetStarted';
+
 const App = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
-        <Navbar />
-        <AnimatedRoutes />
-        <Routes>
-          <Route path="/passangerSignUp" element={<PassangerSignUp />} />
-          <Route path="/passangerSignIn" element={<PassangerSignIn />} />
-        </Routes>
+        <AppContent />
       </Router>
     </ThemeProvider>
+  );
+};
+const AppContent = () => {
+  const location = useLocation();
+  return (
+    <>
+      {location.pathname!=="/Admin/mainDashboard"&& <Navbar />}
+      <AnimatedRoutes />
+      <Routes>
+        <Route path="/passangerSignUp" element={<PassangerSignUp />} />
+        <Route path="/passangerSignIn" element={<PassangerSignIn />} />
+      </Routes>
+    </>
   );
 };
 
@@ -79,7 +90,6 @@ const AnimatedRoutes = () => {
             </PageWrapper>
           }
         />
-
         <Route
           path="/createRide"
           element={
@@ -152,7 +162,14 @@ const AnimatedRoutes = () => {
             </PageWrapper>
           }
         />
-        
+        <Route
+          path="/Admin/MainDashboard"
+          element={
+            <PageWrapper>
+              <AdminDasboard/>
+            </PageWrapper>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );
