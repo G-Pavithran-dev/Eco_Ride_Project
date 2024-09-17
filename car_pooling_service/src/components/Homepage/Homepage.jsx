@@ -43,7 +43,7 @@ const Homepage = () => {
       Swal.fire({
         icon: "warning",
         title: "Oops...",
-        text: "Login to create Ride!",
+        text: "Login to create R!",
       });
     }
   };
@@ -98,39 +98,39 @@ const Homepage = () => {
           <div
             className="line1"
             style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
             }}
           >
             <h1
-              style={{ fontSize: '3rem' }}
+              style={{ fontSize: "3rem" }}
               onClick={() => {
-                navigate('/profile')
+                navigate("/profile");
               }}
             >
-              Eco Ride{' '}
+              Car Pooling Service{" "}
             </h1>
             &nbsp;&nbsp;
-            <h1 style={{ fontSize: '3rem' }}>
+            <h1 style={{ fontSize: "3rem" }}>
               <TextTransition springConfig={presets.wobbly}>
                 {TEXTS[index % TEXTS.length]}
               </TextTransition>
             </h1>
             &nbsp;&nbsp;
-            <h1 style={{ fontSize: '3rem' }}> Skcetians</h1>
+            <h1 style={{ fontSize: "3rem" }}> Skcetians</h1>
           </div>
           <div className="line2">
             <h1>
-              Our Ecoride is a convenient platform designed to connect students
-              and staff of SKCET for shared rides, promoting cost-effective and
-              eco-friendly commuting
+              The Car Pooling Service for SKCETians is a convenient platform
+              designed to connect students and staff of SKCET for shared rides,
+              promoting cost-effective and eco-friendly commuting
             </h1>
           </div>
         </div>
       </motion.div>
 
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: "flex" }}>
         <motion.div
           ref={section1Ref}
           id="section1"
@@ -142,50 +142,51 @@ const Homepage = () => {
           transition={{ duration: 0.5 }}
           className="w-[50dvw]"
           style={{
-            backgroundColor: 'rgba(178, 243, 178,0)',
-            height: '70dvh',
-            width: '50dvw',
-            alignItems: 'center',
-            alignContent: 'center',
+            backgroundColor: "rgba(178, 243, 178,0)",
+            height: "70dvh",
+            width: "50dvw",
+            alignItems: "center",
+            alignContent: "center",
           }}
         >
           <div
             style={{
-              marginLeft: '16%',
-              display: 'flex',
-              flexDirection: 'column',
-              marginRight: '5%',
+              marginLeft: "16%",
+              display: "flex",
+              flexDirection: "column",
+              marginRight: "5%",
             }}
           >
             <div
               style={{
-                display: 'flex',
-                fontSize: '1.3rem',
-                padding: '0rem',
+                display: "flex",
+                fontSize: "1.3rem",
+                padding: "0rem",
               }}
             >
               <h2>For </h2>
-              <h1 className="bg-background font-bold text-4xl">Pilots</h1>
+              <h1 className="bg-background font-bold text-4xl">Co-Rider</h1>
             </div>
             <h4
               className="text-2xl"
               style={{
-                fontWeight: '500',
-                fontSize: '125%',
-                alignContent: 'center',
-                alignItems: 'center',
-                paddingBottom: '6%',
+                fontWeight: "500",
+                fontSize: "125%",
+                alignContent: "center",
+                alignItems: "center",
+                paddingBottom: "6%",
               }}
             >
-              Publish your ride and let fellow students join you. Share the
-              journey and petrol costs, making commuting more affordable.
+              Join rides with car-owning students, enjoy a comfortable journey,
+              and share petrol costs. Experience convenient and cost-effective
+              commuting.
             </h4>
             <Button
               
               variant="contained"
               sx={{
-                backgroundColor: 'black',
-                width: '25%',
+                backgroundColor: "black",
+                width: "25%",
               }}
               onClick={handleCreateRide}
             >
@@ -204,55 +205,54 @@ const Homepage = () => {
           }}
           transition={{ duration: 0.5 }}
           style={{
-            alignContent: 'center',
-            width: '50dvw',
-            height: '70dvh',
-            backgroundColor: 'rgba(178, 243, 178,0.3)',
+            alignContent: "center",
+            width: "50dvw",
+            height: "70dvh",
+            backgroundColor: "rgba(178, 243, 178,0.3)"
           }}
           // className="bg bg-gradient-to-tr from-white to-green-500 w-[50dvw] h-[70dvh] items-center content-center"
         >
           <div
             style={{
-              marginLeft: '16%',
-              display: 'flex',
-              flexDirection: 'column',
-              marginRight: '5%',
+              marginLeft: "16%",
+              display: "flex",
+              flexDirection: "column",
+              marginRight: "5%",
             }}
           >
             <div
               style={{
-                display: 'flex',
-                fontSize: '1.3rem',
-                gap: 'vh',
-                padding: '0rem',
+                display: "flex",
+                fontSize: "1.3rem",
+                gap: "vh",
+                padding: "0rem",
               }}
             >
               <h2 className="font-bold">For </h2>
-              <div className=" font-bold text-4xl text-foreground">Passengers</div>
+              <div className=" font-bold text-4xl text-foreground">Owner</div>
             </div>
             <h4
               className="text-2xl"
               style={{
-                fontWeight: '500',
-                fontSize: '120%',
-                alignContent: 'center',
-                alignItems: 'center',
-                paddingBottom: '6%',
+                fontWeight: "500",
+                fontSize: "125%",
+                alignContent: "center",
+                alignItems: "center",
+                paddingBottom: "6%",
               }}
             >
-              Join rides with car-owning students, enjoy a comfortable journey,
-              and share costs. Experience convenient and cost-effective
-              rides.
+              Publish your ride and let fellow students join you. Share the
+              journey and petrol costs, making commuting more affordable.
             </h4>
 
             <Button
               variant="contained"
               sx={{
-                width: '25%',
-                backgroundColor: 'black',
-                marginTop: '1%',
+                width: "25%",
+                backgroundColor: "black",
+                marginTop: "1%",
               }}
-              onClick={() => navigate('/bookRide')}
+              onClick={() => navigate("/bookRide")}
             >
               Book ride
             </Button>
@@ -270,7 +270,7 @@ const Homepage = () => {
         }}
         transition={{ duration: 0.5 }}
         className="about"
-        style={{ marginTop: '5%', paddingLeft: '5%' }}
+        style={{ marginTop: "5%", paddingLeft: "5%" }}
       >
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
           Why use Car-La-Selvom ?
@@ -279,7 +279,7 @@ const Homepage = () => {
           className="useService"
           ref={whyUseRef}
           id="whyUse"
-          style={{ paddingTop: '5%' }}
+          style={{ paddingTop: "5%" }}
         >
           <div className="use1">
             <h2 className="ml-6">Easy Connect for Rides</h2>
@@ -311,7 +311,7 @@ const Homepage = () => {
         <Footer />
       </motion.div>
     </div>
-  )
+  );
 };
 
 export default Homepage;
