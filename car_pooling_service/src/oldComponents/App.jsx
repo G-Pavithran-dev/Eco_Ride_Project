@@ -9,13 +9,14 @@ import Navbar from "../oldComponents/Navbar/Navbar";
 import Dummy from "../components/Dummy";
 import SuccessSignIn from "../oldComponents/SignIn/SuccessSignin";
 import Sample from "./CreateRide/Sample";
-
+import UserDashboard from "../components/Admin/UserDashboard/UserDashboard";
 const App = () => {
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        {/* <Route path="/" element={<Homepage />} /> */}
+        <Route path="/" element={<UserDashboard />} />
         <Route path="/createRide" element={<CreateRide />} />
         <Route path="/bookRide" element={<BookRide />} />
         <Route path="/signup" element={<SignUp />} />

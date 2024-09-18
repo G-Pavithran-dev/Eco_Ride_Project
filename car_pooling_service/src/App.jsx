@@ -5,7 +5,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import BookRide from "./components/BookRide/BookRide";
-import { ThemeProvider } from "./components/ThemeProvider.jsx";
+// import { ThemeProvider } from "./components/ThemeProvider.jsx";
 import Homepage from "./components/Homepage/Homepage";
 import SignInSide from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
@@ -27,22 +27,23 @@ import Map from "./components/Map/Map.jsx";
 import MyModal from "./components/DialogueBox/Dialogue.jsx";
 import AdminDasboard from "./components/Admin/AdminDashboard/AdminDasboard.jsx";
 import { useEffect, useState } from "react";
+import UserDashboard from "./components/Admin/UserDashboard/UserDashboard.jsx";
 // import GetStarted from './components/getStartedPage/GetStarted';
 
 const App = () => {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Router>
-        <AppContent />
-      </Router>
-    </ThemeProvider>
+    // <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <Router>
+      <AppContent />
+    </Router>
+    // </ThemeProvider>
   );
 };
 const AppContent = () => {
   const location = useLocation();
   return (
     <>
-      {location.pathname!=="/Admin/mainDashboard"&& <Navbar />}
+      {location.pathname !== "/Admin/mainDashboard" && <Navbar />}
       <AnimatedRoutes />
       <Routes>
         <Route path="/passangerSignUp" element={<PassangerSignUp />} />
@@ -95,6 +96,14 @@ const AnimatedRoutes = () => {
           element={
             <PageWrapper>
               <CreateRide />
+            </PageWrapper>
+          }
+        />
+        <Route
+          path="/userDashboard"
+          element={
+            <PageWrapper>
+              <UserDashboard />
             </PageWrapper>
           }
         />
@@ -158,7 +167,7 @@ const AnimatedRoutes = () => {
           path="/PilotsRideHistory"
           element={
             <PageWrapper>
-              <PilotsRideHistory/>
+              <PilotsRideHistory />
             </PageWrapper>
           }
         />
@@ -166,7 +175,7 @@ const AnimatedRoutes = () => {
           path="/Admin/MainDashboard"
           element={
             <PageWrapper>
-              <AdminDasboard/>
+              <AdminDasboard />
             </PageWrapper>
           }
         />
