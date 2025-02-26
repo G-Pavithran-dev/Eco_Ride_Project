@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.car_backend.model.bookRide.BookRide;
 import com.example.car_backend.repository.bookRide.BookRideRepo;
+import com.example.car_backend.service.MailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,9 @@ import org.springframework.web.bind.annotation.PutMapping;;
 public class BookRideController {
     @Autowired
     BookRideRepo repo;
+
+    @Autowired
+    protected MailService mailService;
 
     @GetMapping("/app/bookride/getallrides")
     public List<BookRide> getMethodName() {
@@ -107,8 +111,8 @@ public class BookRideController {
 
     @PostMapping("/app/createride")
     public BookRide createAnRide(@RequestBody BookRide bookRide) {
-
         bookRide.setRideCompletionStatus("no");
+        mailService.sendNewRideNotification(bookRide);
         return repo.save(bookRide);
     }
 

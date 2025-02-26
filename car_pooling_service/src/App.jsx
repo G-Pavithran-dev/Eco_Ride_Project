@@ -3,58 +3,74 @@ import {
   BrowserRouter as Router,
   Routes,
   useLocation,
-} from "react-router-dom";
-import BookRide from "./components/BookRide/BookRide";
-// import { ThemeProvider } from "./components/ThemeProvider.jsx";
-import Homepage from "./components/Homepage/Homepage";
-import SignInSide from "./components/SignIn/SignIn";
-import SignUp from "./components/SignUp/SignUp";
-import CreateRide from "./components/CreateRide/CreateRide";
-import Navbar from "./components/NavBar/NavBar";
-import ProfilePage from "./components/ProfilePage/ProfilePage";
+} from 'react-router-dom'
+import BookRide from './components/BookRide/BookRide'
+import { ThemeProvider } from './components/ThemeProvider.jsx'
+import Homepage from './components/Homepage/Homepage'
+import SignInSide from './components/SignIn/SignIn'
+import SignUp from './components/SignUp/SignUp'
+import CreateRide from './components/CreateRide/CreateRide'
+import Navbar from './components/NavBar/NavBar'
+import ProfilePage from './components/ProfilePage/ProfilePage'
 
-import { AnimatePresence, motion } from "framer-motion";
-import PropTypes from "prop-types";
-import SuccessSignIn from "./components/SignIn/SuccessSignin";
-import PublishedRideHistory from "./components/PublishedRideHistory/PublishedRideHistory";
-import PilotsRideHistory from "./components/PilotsRideHistory/PilotsRideHistory.jsx";
+import { AnimatePresence, motion } from 'framer-motion'
+import PropTypes from 'prop-types'
+import SuccessSignIn from './components/SignIn/SuccessSignin'
+import PublishedRideHistory from './components/PublishedRideHistory/PublishedRideHistory'
+import PilotsRideHistory from './components/PilotsRideHistory/PilotsRideHistory.jsx'
 
-import PassangerSignIn from "./components/PassangerAuthorization/PassangerSignIn";
-import PassangerSignUp from "./components/PassangerAuthorization/PassangerSignUp";
-import RiderSignUp from "./components/RiderAuthorization/RiderSignUp";
-import Footer from "./components/Footer/Footer.jsx";
-import Map from "./components/Map/Map.jsx";
-import MyModal from "./components/DialogueBox/Dialogue.jsx";
-import AdminDasboard from "./components/Admin/AdminDashboard/AdminDasboard.jsx";
-import { useEffect, useState } from "react";
-import UserDashboard from "./components/Admin/UserDashboard/UserDashboard.jsx";
+import PassangerSignIn from './components/PassangerAuthorization/PassangerSignIn'
+import PassangerSignUp from './components/PassangerAuthorization/PassangerSignUp'
+import RiderSignUp from './components/RiderAuthorization/RiderSignUp'
+import Footer from './components/Footer/Footer.jsx'
+import Map from './components/Map/Map.jsx'
+import MyModal from './components/DialogueBox/Dialogue.jsx'
+import AdminDasboard from './components/Admin/AdminDashboard/AdminDasboard.jsx'
+import { useEffect, useState } from 'react'
+import UserDashboard from './components/Admin/UserDashboard/UserDashboard.jsx'
+import DashboardNav from './components/Admin/Navbar/DashboardNav.jsx'
+import { useDispatch } from 'react-redux'
+import { setIsLogin, setLogin } from './components/Store/Reducer.jsx'
+import Cookies from 'js-cookie'
 // import GetStarted from './components/getStartedPage/GetStarted';
 
 const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const cookie = Cookies.get('userdata')
+    if (cookie) {
+      dispatch(setLogin(JSON.parse(cookie)))
+      dispatch(setIsLogin(true))
+    } else {
+      dispatch(setIsLogin(false))
+    }
+  })
+
   return (
-    // <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <Router>
-      <AppContent />
-    </Router>
-    // </ThemeProvider>
-  );
-};
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <Router>
+        <AppContent />
+      </Router>
+    </ThemeProvider>
+  )
+}
 const AppContent = () => {
-  const location = useLocation();
+  const location = useLocation()
   return (
     <>
-      {location.pathname !== "/Admin/mainDashboard" && <Navbar />}
+      {location.pathname.startsWith('/Admin/') ? <DashboardNav /> : <Navbar />}
       <AnimatedRoutes />
       <Routes>
         <Route path="/passangerSignUp" element={<PassangerSignUp />} />
         <Route path="/passangerSignIn" element={<PassangerSignIn />} />
       </Routes>
     </>
-  );
-};
+  )
+}
 
 const AnimatedRoutes = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <AnimatePresence mode="wait">
@@ -156,7 +172,7 @@ const AnimatedRoutes = () => {
           }
         />
         <Route
-          path="/dummy"
+          path="/passengerRideHistory"
           element={
             <PageWrapper>
               <PublishedRideHistory />
@@ -181,8 +197,8 @@ const AnimatedRoutes = () => {
         />
       </Routes>
     </AnimatePresence>
-  );
-};
+  )
+}
 
 const PageWrapper = ({ children }) => (
   <motion.div
@@ -193,10 +209,10 @@ const PageWrapper = ({ children }) => (
   >
     {children}
   </motion.div>
-);
+)
 
 PageWrapper.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default App;
+export default App

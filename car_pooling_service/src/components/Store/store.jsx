@@ -6,6 +6,7 @@ const store = configureStore({
     loginReducer: Reducer.Loginslice,
     selectedIdReducer: Reducer.selectedIdslice,
     rideDataReducer: Reducer.rideDataSlice,
+    loginDataReducer: Reducer.IsLoginSlice,
   },
 });
 

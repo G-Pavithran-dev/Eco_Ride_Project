@@ -5,62 +5,62 @@ import {
   Box,
   Autocomplete,
   Grid,
-} from "@mui/material";
-import { useState } from "react";
-import "../CreateRide/RideCard.css";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+} from '@mui/material'
+import { useState } from 'react'
+import '../CreateRide/RideCard.css'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const RideCard = () => {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState('')
 
-  const [leaving, setLeaving] = useState("");
-  const [going, setGoing] = useState("");
-  const [availableSeats, setSeats] = useState("");
-  const [price, setPrice] = useState("");
-  const [carName, setCarName] = useState("");
-  const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [name] = useState("Sadasivam");
-  const [email] = useState("727722euit131@skcet.ac.in");
-  const [phNo] = useState("8667455968");
-  const [errors, setErrors] = useState({});
-  const [input, setInptut] = useState("");
+  const [leaving, setLeaving] = useState('')
+  const [going, setGoing] = useState('')
+  const [availableSeats, setSeats] = useState('')
+  const [price, setPrice] = useState('')
+  const [carName, setCarName] = useState('')
+  const [date, setDate] = useState('')
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
+  const [name] = useState('Sadasivam')
+  const [email] = useState('727722euit131@skcet.ac.in')
+  const [phNo] = useState('8667455968')
+  const [errors, setErrors] = useState({})
+  const [input, setInptut] = useState('')
 
   const [suggestions, setSuggestions] = useState([
-    { label: "Marudhamalai Temple" },
-    { label: "VOC Park and Zoo" },
-    { label: "Siruvani Waterfalls" },
-    { label: "Gedee Car Museum" },
-    { label: "Perur Pateeswarar Temple" },
-    { label: "Adiyogi Shiva Statue" },
-    { label: "TNAU Botanical Garden" },
-    { label: "Brookefields Mall" },
-    { label: "Kovai Kondattam Amusement Park" },
-    { label: "Black Thunder Water Park" },
-  ]);
+    { label: 'Marudhamalai Temple' },
+    { label: 'VOC Park and Zoo' },
+    { label: 'Siruvani Waterfalls' },
+    { label: 'Gedee Car Museum' },
+    { label: 'Perur Pateeswarar Temple' },
+    { label: 'Adiyogi Shiva Statue' },
+    { label: 'TNAU Botanical Garden' },
+    { label: 'Brookefields Mall' },
+    { label: 'Kovai Kondattam Amusement Park' },
+    { label: 'Black Thunder Water Park' },
+  ])
 
-  const [api, setApi] = useState([]);
-  const [textFieldValue, setTextFieldValue] = useState("");
-  const navigate = useNavigate();
+  const [api, setApi] = useState([])
+  const [textFieldValue, setTextFieldValue] = useState('')
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const newErrors = {};
+    event.preventDefault()
+    const newErrors = {}
 
-    if (!leaving) newErrors.leaving = "This field is required";
-    if (!going) newErrors.going = "This field is required";
-    if (!availableSeats) newErrors.availableSeats = "This field is required";
-    if (!price) newErrors.price = "This field is required";
-    if (!carName) newErrors.carName = "This field is required";
-    if (!date) newErrors.date = "This field is required";
-    if (!startTime) newErrors.startTime = "This field is required";
-    if (!endTime) newErrors.endTime = "This field is required";
+    if (!leaving) newErrors.leaving = 'This field is required'
+    if (!going) newErrors.going = 'This field is required'
+    if (!availableSeats) newErrors.availableSeats = 'This field is required'
+    if (!price) newErrors.price = 'This field is required'
+    if (!carName) newErrors.carName = 'This field is required'
+    if (!date) newErrors.date = 'This field is required'
+    if (!startTime) newErrors.startTime = 'This field is required'
+    if (!endTime) newErrors.endTime = 'This field is required'
 
-    setErrors(newErrors);
+    setErrors(newErrors)
 
     if (Object.keys(newErrors).length === 0) {
       const rideDetails = {
@@ -75,33 +75,36 @@ const RideCard = () => {
         date,
         startTime,
         endTime,
-      };
+      }
       axios
-        .post("http://localhost:8080/app/createride", rideDetails)
+        .post(
+          `http://${import.meta.env.VITE_LOCAL_URL}/app/createride`,
+          rideDetails
+        )
         .then((response) => {
-          setStatus("success");
+          setStatus('success')
 
           Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Ride details submitted successfully!",
-          });
+            icon: 'success',
+            title: 'Success',
+            text: 'Ride details submitted successfully!',
+          })
         })
         .catch((error) => {
           console.error(
-            "There was an error submitting the ride details:",
+            'There was an error submitting the ride details:',
             error
-          );
-          setStatus("error");
+          )
+          setStatus('error')
           Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "There was an error submitting the ride details.",
-          });
-        });
+            icon: 'error',
+            title: 'Error',
+            text: 'There was an error submitting the ride details.',
+          })
+        })
     }
-  };
-  console.log(textFieldValue);
+  }
+  console.log(textFieldValue)
 
   return (
     <motion.div
@@ -110,29 +113,29 @@ const RideCard = () => {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
       style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        height: "100vh",
-        position: "relative",
-        alignItems: "center",
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        height: '100vh',
+        position: 'relative',
+        alignItems: 'center',
       }}
     >
       <Paper
         className="paper-comp"
         elevation={5}
         sx={{
-          borderRadius: "20px",
-          height: "auto",
-          width: "40%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "50px",
+          borderRadius: '20px',
+          height: 'auto',
+          width: '40%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          padding: '50px',
 
-          backgroundColor: "white",
-          overflow: "auto",
-          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+          backgroundColor: 'white',
+          overflow: 'auto',
+          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Box
@@ -150,13 +153,13 @@ const RideCard = () => {
                 value={textFieldValue}
                 id="check"
                 onChange={(e, value) => {
-                  setTextFieldValue(value);
+                  setTextFieldValue(value)
                 }}
               />
               <Autocomplete
                 id="outlined-leaving"
                 options={suggestions}
-                getOptionLabel={(option) => option.label || ""}
+                getOptionLabel={(option) => option.label || ''}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -172,15 +175,15 @@ const RideCard = () => {
                 )}
                 value={leaving ? { label: leaving } : null}
                 onChange={(event, newValue) => {
-                  if (newValue && typeof newValue === "object") {
-                    setLeaving(newValue.label);
+                  if (newValue && typeof newValue === 'object') {
+                    setLeaving(newValue.label)
                   } else {
-                    const newLabel = newValue || "";
-                    setLeaving(newLabel);
+                    const newLabel = newValue || ''
+                    setLeaving(newLabel)
                     if (
                       !suggestions.some((option) => option.label === newLabel)
                     ) {
-                      setSuggestions([...suggestions, { label: newLabel }]);
+                      setSuggestions([...suggestions, { label: newLabel }])
                     }
                   }
                 }}
@@ -192,7 +195,7 @@ const RideCard = () => {
                       (option) => option.label === newInputValue
                     )
                   ) {
-                    setSuggestions([...suggestions, { label: newInputValue }]);
+                    setSuggestions([...suggestions, { label: newInputValue }])
                   }
                 }}
               />
@@ -201,7 +204,7 @@ const RideCard = () => {
               <Autocomplete
                 id="outlined-going"
                 options={suggestions}
-                getOptionLabel={(option) => option.label || ""}
+                getOptionLabel={(option) => option.label || ''}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -217,15 +220,15 @@ const RideCard = () => {
                 )}
                 value={going ? { label: going } : null}
                 onChange={(event, newValue) => {
-                  if (newValue && typeof newValue === "object") {
-                    setGoing(newValue.label);
+                  if (newValue && typeof newValue === 'object') {
+                    setGoing(newValue.label)
                   } else {
-                    const newLabel = newValue || "";
-                    setGoing(newLabel);
+                    const newLabel = newValue || ''
+                    setGoing(newLabel)
                     if (
                       !suggestions.some((option) => option.label === newLabel)
                     ) {
-                      setSuggestions([...suggestions, { label: newLabel }]);
+                      setSuggestions([...suggestions, { label: newLabel }])
                     }
                   }
                 }}
@@ -237,7 +240,7 @@ const RideCard = () => {
                       (option) => option.label === newInputValue
                     )
                   ) {
-                    setSuggestions([...suggestions, { label: newInputValue }]);
+                    setSuggestions([...suggestions, { label: newInputValue }])
                   }
                 }}
               />
@@ -338,23 +341,23 @@ const RideCard = () => {
             variant="contained"
             fullWidth
             style={{
-              marginTop: "20px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "centers",
+              marginTop: '20px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'centers',
             }}
           >
             Create Ride
           </Button>
         </Box>
       </Paper>
-      {status === "success" &&
+      {status === 'success' &&
         setTimeout(() => {
-          navigate("/dummy");
+          navigate('/passengerRideHistory')
         }, 2000)}
       ;
     </motion.div>
-  );
-};
+  )
+}
 
-export default RideCard;
+export default RideCard

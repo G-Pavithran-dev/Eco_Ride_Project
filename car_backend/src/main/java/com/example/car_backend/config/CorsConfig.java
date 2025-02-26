@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") 
-                        .allowedOrigins("http://localhost:5173","https://eco-connect-infinity.vercel.app") 
+                        .allowedOrigins( "http://localhost:5173", "https://ecoride-infinity.vercel.app", "http://ecoride.s3-website-us-east-1.amazonaws.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE") 
                         .allowedHeaders("*") 
                         .allowCredentials(true);

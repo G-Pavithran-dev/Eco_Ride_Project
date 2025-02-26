@@ -87,7 +87,7 @@ export default function PassangerSignUp() {
     }
     console.log(formValues)
     await axios
-      .post('http://localhost:8080/signup', data)
+      .post(`http://${import.meta.env.VITE_LOCAL_URL}/signup`, data)
       .then((Response) => {
         if (Response.status === 201) {
           console.log(Response)
@@ -104,7 +104,7 @@ export default function PassangerSignUp() {
   const handleOtpVerification = async (event) => {
     event.preventDefault()
     axios
-      .get(`http://localhost:8080/verify/${otp}`)
+      .get(`http://${import.meta.env.VITE_LOCAL_URL}/verify/${otp}`)
       .then((Response) => {
         if (Response.status === 202) {
           setopen(false)
@@ -150,7 +150,7 @@ export default function PassangerSignUp() {
     setEmail(event.target.value)
     console.log(event.target.value)
     if (!/^[A-Z0-9._%+-]+@skcet\.ac\.in$/i.test(event.target.value))
-      setErrors({...errors, emailError: 'Enter a valid SKCET email address.'})
+      setErrors({ ...errors, emailError: 'Enter a valid SKCET email address.' })
     else setErrors({ ...errors, emailError: '' })
   }
 
@@ -363,7 +363,19 @@ export default function PassangerSignUp() {
                       <AlertDialogTrigger asChild>
                         <button
                           type="submit"
-                          disabled={errors.emailError !== '' || errors.passwordError !== '' || errors.mobileNumberError !== '' || firstName === '' || lastName === '' || email === '' || password === '' || phoneNumber === '' || idCard === null || department === '' || year === ''}
+                          disabled={
+                            errors.emailError !== '' ||
+                            errors.passwordError !== '' ||
+                            errors.mobileNumberError !== '' ||
+                            firstName === '' ||
+                            lastName === '' ||
+                            email === '' ||
+                            password === '' ||
+                            phoneNumber === '' ||
+                            idCard === null ||
+                            department === '' ||
+                            year === ''
+                          }
                           className="px-4 py-1 bg-foreground text-white rounded disabled:opacity-50"
                         >
                           Submit
@@ -371,18 +383,30 @@ export default function PassangerSignUp() {
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          {idCardCheck && <><AlertDialogTitle>Invalid ID Card</AlertDialogTitle></>}
-                          {!idCardCheck && <><AlertDialogTitle>OTP Verification</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            You're at the final step. Enter the OTP sent to your
-                            mail <b>{email}</b> to complete the registration.
-                          </AlertDialogDescription></>
-                          }
+                          {idCardCheck && (
+                            <>
+                              <AlertDialogTitle>
+                                Invalid ID Card
+                              </AlertDialogTitle>
+                            </>
+                          )}
+                          {!idCardCheck && (
+                            <>
+                              <AlertDialogTitle>
+                                OTP Verification
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                You're at the final step. Enter the OTP sent to
+                                your mail <b>{email}</b> to complete the
+                                registration.
+                              </AlertDialogDescription>
+                            </>
+                          )}
                         </AlertDialogHeader>
                         {!open && (
                           <>
-                            <section className='flex flex-row items-center'>
-                              <CircularProgress className='m-4' />
+                            <section className="flex flex-row items-center">
+                              <CircularProgress className="m-4" />
                               Recognizing your ID Card...
                             </section>
                             Please wait while we send the OTP to your email.
@@ -391,8 +415,11 @@ export default function PassangerSignUp() {
                         {idCardCheck && (
                           <>
                             <section>
-                              <p className='text-red-600 italic'>Sorry, We unable to recognize your ID card. It may occur for following reasons:</p>
-                              <ul className='list-disc list-inside text-red-600 italic'>
+                              <p className="text-red-600 italic">
+                                Sorry, We unable to recognize your ID card. It
+                                may occur for following reasons:
+                              </p>
+                              <ul className="list-disc list-inside text-red-600 italic">
                                 <li>1. You have uploaded a wrong ID card.</li>
                                 <li>2. The ID card is not clear.</li>
                                 <li>3. The ID card is not from SKCET.</li>

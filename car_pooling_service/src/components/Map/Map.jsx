@@ -1,8 +1,8 @@
 // import Image from "next/image"
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import MapComponent from "../../oldComponents/BookRide/Map";
-import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import MapComponent from '../../oldComponents/BookRide/Map'
+import 'leaflet/dist/leaflet.css' // Import Leaflet CSS
 import {
   ChevronLeft,
   ChevronRight,
@@ -21,9 +21,9 @@ import {
   ShoppingCart,
   Truck,
   Users2,
-} from "lucide-react";
+} from 'lucide-react'
 
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -31,8 +31,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/breadcrumb'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -40,7 +40,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -49,16 +49,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
 // import { Input } from "@/components/ui/input";
 
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
-} from "@/components/ui/pagination";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/pagination'
+import { Progress } from '@/components/ui/progress'
+import { Separator } from '@/components/ui/separator'
 // import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
@@ -67,105 +67,108 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useEffect, useState } from "react";
-import axios from "axios";
+} from '@/components/ui/table'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function Map() {
-  const profile = useSelector((state) => state.loginReducer);
-  const rideId = useSelector((state) => state.selectedIdReducer);
-  const [mapData, setmapData] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [open, setOpen] = useState(false);
+  const profile = useSelector((state) => state.loginReducer)
+  const rideId = useSelector((state) => state.selectedIdReducer)
+  const [mapData, setmapData] = useState(null)
+  const [latitude, setLatitude] = useState(null)
+  const [longitude, setLongitude] = useState(null)
+  const [open, setOpen] = useState(false)
   // useEffect(() => {
   //   console.log("MapData from useffect ", mapData);
   //   if (!mapData) {
   //     console.log(latitude + " " + longitude);
   //   }
   // }, [mapData]);
-  const passLongitude=localStorage.getItem("passLongitude");
-  const passLatitude=localStorage.getItem("passLati");
-  const passLocation=localStorage.getItem("passLocation");
-  const [distance,setDistance]=useState(0);
-  const  haversine=(lat1, lon1, lat2, lon2)=> {
+  const passLongitude = localStorage.getItem('passLongitude')
+  const passLatitude = localStorage.getItem('passLati')
+  const passLocation = localStorage.getItem('passLocation')
+  const [distance, setDistance] = useState(0)
+  const haversine = (lat1, lon1, lat2, lon2) => {
     // Convert latitude and longitude from degrees to radians
-    console.log("hi");
-    console.log("hi");
-    console.log("hi");
-    console.log("hi");
-    console.log("hi");
-    console.log("hi");
-    console.log("hi");
-    console.log("hi");
-    console.log(lat1,lat2,lon1,lon2);
+    console.log('hi')
+    console.log(lat1, lat2, lon1, lon2)
 
-    const toRadians = (degree) => degree * (Math.PI / 180);
+    const toRadians = (degree) => degree * (Math.PI / 180)
 
-    lat1 = toRadians(lat1);
-    lon1 = toRadians(lon1);
-    lat2 = toRadians(lat2);
-    lon2 = toRadians(lon2);
+    lat1 = toRadians(lat1)
+    lon1 = toRadians(lon1)
+    lat2 = toRadians(lat2)
+    lon2 = toRadians(lon2)
 
     // Haversine formula
-    const dLat = lat2 - lat1;
-    const dLon = lon2 - lon1;
+    const dLat = lat2 - lat1
+    const dLon = lon2 - lon1
     const a =
       Math.sin(dLat / 2) ** 2 +
-      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
     // Earth's radius in kilometers
-    const R = 6371;
-    const distance = R * c;
+    const R = 6371
+    const distance = R * c
 
-    return distance;
+    return distance
   }
- 
-  useEffect(() => {
 
+  useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/app/bookride/selectedValue/${rideId.idSelected}`
+        `http://${
+          import.meta.env.VITE_LOCAL_URL
+        }/app/bookride/selectedValue/${rideId.idSelected}`
       )
       .then((response) => {
         {
-          console.log("Rider details ", response.data);
-          setmapData(response.data);
-          setLatitude(response.data.leavingFromLatitude);
-          setLongitude(response.data.leavingFromLongitude);
-          console.log("haver sine called",response.data.leavingFromLatitude,response.data.leavingFromLongitude, passLatitude, passLongitude)  ;
-          const dis=haversine(response.data.leavingFromLatitude,response.data.leavingFromLongitude,passLatitude, passLongitude);
-          console.log("distance is " ,dis);
-          setDistance(dis);
-          setOpen(true);
+          console.log('Rider details ', response.data)
+          setmapData(response.data)
+          setLatitude(response.data.leavingFromLatitude)
+          setLongitude(response.data.leavingFromLongitude)
+          console.log(
+            'haver sine called',
+            response.data.leavingFromLatitude,
+            response.data.leavingFromLongitude,
+            passLatitude,
+            passLongitude
+          )
+          const dis = haversine(
+            response.data.leavingFromLatitude,
+            response.data.leavingFromLongitude,
+            passLatitude,
+            passLongitude
+          )
+          console.log('distance is ', dis)
+          setDistance(dis)
+          setOpen(true)
         }
       })
       .catch((error) => {
-        console.error(error);
-      });
-    console.log("The ride details", mapData);
-    
-  }, []);
-  useEffect(()=>{
+        console.error(error)
+      })
+    console.log('The ride details', mapData)
+  }, [])
+  useEffect(() => {
     // console.log("haver sine called",response.data.leavingFromLatitude,response.data.leavingFromLongitude, passLatitude, passLongitude)  ;
-          const dis=haversine(latitude,longitude,passLatitude, passLongitude);
-          console.log("distance is " ,dis);
-  },[latitude,longitude])
+    const dis = haversine(latitude, longitude, passLatitude, passLongitude)
+    console.log('distance is ', dis)
+  }, [latitude, longitude])
   useEffect(() => {
-    console.log("the profile", profile);
-  }, [profile]);
+    console.log('the profile', profile)
+  }, [profile])
   useEffect(() => {
-    console.log("the mapData", rideId);
-    
-  }, [rideId]);
+    console.log('the mapData', rideId)
+  }, [rideId])
 
-  console.log("check", mapData);
-  console.log("open", open);
+  console.log('check', mapData)
+  console.log('open', open)
 
   //*calculate distance between passanger and driver
-  
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -175,7 +178,7 @@ export default function Map() {
               <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
                 <CardHeader className="pb-3">
                   <CardTitle>
-                    {profile.firstName + " " + profile.lastName}
+                    {profile.firstName + ' ' + profile.lastName}
                   </CardTitle>
                   <CardDescription className="max-w-lg text-balance leading-relaxed">
                     Year of Studying : {profile.yearOfStudy}
@@ -191,7 +194,7 @@ export default function Map() {
               <Card x-chunk="dashboard-05-chunk-1">
                 <CardHeader className="pb-2">
                   <CardDescription></CardDescription>
-                  <CardTitle className="text-2xl">Eligable for Ride</CardTitle>
+                  <CardTitle className="text-2xl">Eligible for Ride</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-green-700 font-bold text-2xl">
@@ -202,16 +205,13 @@ export default function Map() {
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2 ">
                   <CardDescription>Distance away from you</CardDescription>
-                  <CardTitle className="text-xs">
-                    
-                  </CardTitle>
+                  <CardTitle className="text-xs"></CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-[4dvh] text-black text-center  flex align-middle justify-center items-center">
                     {distance.toFixed(2)} km
                   </div>
                 </CardContent>
-               
               </Card>
             </div>
             <Tabs defaultValue="week">
@@ -267,7 +267,7 @@ export default function Map() {
                 ) : (
                   <p>Loading...</p>
                 )}
-                <div className="ml-auto flex items-center gap-1">
+                {/* <div className="ml-auto flex items-center gap-1">
                   <Button size="sm" variant="outline" className="h-8 gap-1">
                     <Truck className="h-3.5 w-3.5" />
                     <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
@@ -288,7 +288,7 @@ export default function Map() {
                       <DropdownMenuItem>Trash</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                </div>
+                </div> */}
               </CardHeader>
               <CardContent className="p-6 text-sm">
                 <div className="grid gap-3">
@@ -402,7 +402,7 @@ export default function Map() {
                         )}
                       </div>
                       <div className="m-1">
-                        {" "}
+                        {' '}
                         {mapData ? (
                           <div className="flex flex-col sm:flex-row justify-aro w-full">
                             <span className="text-gray-600 font-semibold">
@@ -439,5 +439,5 @@ export default function Map() {
         </main>
       </div>
     </div>
-  );
+  )
 }

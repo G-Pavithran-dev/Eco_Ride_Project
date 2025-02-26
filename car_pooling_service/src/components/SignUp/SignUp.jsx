@@ -140,7 +140,7 @@ export default function SignUp() {
     console.log(formValues)
 
     await axios
-      .post('http://localhost:8080/signup', data)
+      .post(`http://${import.meta.env.VITE_LOCAL_URL}/signup`, data)
       .then((Response) => {
         console.log(Response.status)
         if (Response.status === 201) {
@@ -215,7 +215,7 @@ export default function SignUp() {
   const handleOtpVerification = async (event) => {
     event.preventDefault()
     axios
-      .get(`http://localhost:8080/verify/${otp}`)
+      .get(`http://${import.meta.env.VITE_LOCAL_URL}/verify/${otp}`)
       .then((Response) => {
         if (Response.status === 202) {
           setopen(false)

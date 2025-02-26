@@ -67,13 +67,32 @@ const rideDataSlice = createSlice({
   },
 });
 
+const initialLoginState = {
+  isLoggedIn: false,
+}
+
+const loginSlice = createSlice({
+  name: "logindata",
+  initialState: initialLoginState,
+  reducers: {
+    setIsLogin: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
+    setLogout: (state, action) => {
+      state.isLoggedIn = action.payload;
+    }
+  }
+})
+
 // Export actions and reducers
 export const { setIdselected } = selectedIdSlice.actions;
 export const { setLogin } = slice.actions;
 export const { setRides } = rideDataSlice.actions;
+export const { setIsLogin, setLogout } = loginSlice.actions;
 
 export default {
   Loginslice: slice.reducer,
   selectedIdslice: selectedIdSlice.reducer,
   rideDataSlice: rideDataSlice.reducer,
+  IsLoginSlice: loginSlice.reducer,
 };

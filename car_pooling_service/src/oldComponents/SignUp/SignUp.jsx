@@ -1,233 +1,233 @@
 // import * as React from "react";
-import Avatar from "@mui/material/Avatar";
+import Avatar from '@mui/material/Avatar'
 
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import axios from "axios";
+import Button from '@mui/material/Button'
+import CssBaseline from '@mui/material/CssBaseline'
+import TextField from '@mui/material/TextField'
+import { useState } from 'react'
+import Link from '@mui/material/Link'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import axios from 'axios'
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Autocomplete from "@mui/material/Autocomplete";
-import { FormHelperText, Modal } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Autocomplete from '@mui/material/Autocomplete'
+import { FormHelperText, Modal } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 // import { dark } from "@mui/material/styles/createPalette";
 
 const department = [
   {
-    dept: "Computer Science and Engineering",
+    dept: 'Computer Science and Engineering',
   },
   {
-    dept: "Electronics and Communication Engineering",
+    dept: 'Electronics and Communication Engineering',
   },
   {
-    dept: "Electrical and Electronics Engineering",
+    dept: 'Electrical and Electronics Engineering',
   },
   {
-    dept: "Mechanical Engineering",
+    dept: 'Mechanical Engineering',
   },
   {
-    dept: "Civil Engineering",
+    dept: 'Civil Engineering',
   },
   {
-    dept: "Information Technology",
+    dept: 'Information Technology',
   },
   {
-    dept: "Automobile Engineering",
+    dept: 'Automobile Engineering',
   },
   {
-    dept: "Aeronautical Engineering",
+    dept: 'Aeronautical Engineering',
   },
   {
-    dept: "Artificial Intelligence and Data Science",
+    dept: 'Artificial Intelligence and Data Science',
   },
   {
-    dept: "Robotics and Automation Engineering",
+    dept: 'Robotics and Automation Engineering',
   },
   {
-    dept: "Biotechnology Engineering",
+    dept: 'Biotechnology Engineering',
   },
   {
-    dept: "Chemical Engineering",
+    dept: 'Chemical Engineering',
   },
   {
-    dept: "Environmental Engineering",
+    dept: 'Environmental Engineering',
   },
   {
-    dept: "English Literature",
+    dept: 'English Literature',
   },
   {
-    dept: "History",
+    dept: 'History',
   },
   {
-    dept: "Economics",
+    dept: 'Economics',
   },
   {
-    dept: "Political Science",
+    dept: 'Political Science',
   },
   {
-    dept: "Psychology",
+    dept: 'Psychology',
   },
   {
-    dept: "Sociology",
+    dept: 'Sociology',
   },
   {
-    dept: "Journalism and Mass Communication",
+    dept: 'Journalism and Mass Communication',
   },
   {
-    dept: "Visual Communication",
+    dept: 'Visual Communication',
   },
   {
-    dept: "Performing Arts (Music, Dance, Drama)",
+    dept: 'Performing Arts (Music, Dance, Drama)',
   },
   {
-    dept: "Philosophy",
+    dept: 'Philosophy',
   },
   {
-    dept: "Linguistics and Languages (Tamil, Hindi, etc.)",
+    dept: 'Linguistics and Languages (Tamil, Hindi, etc.)',
   },
   {
-    dept: "Fine Arts",
+    dept: 'Fine Arts',
   },
-];
+]
 
 const years = [
   {
-    year: "I YEAR",
+    year: 'I YEAR',
   },
   {
-    year: "II YEAR",
+    year: 'II YEAR',
   },
   {
-    year: "III YEAR",
+    year: 'III YEAR',
   },
   {
-    year: "IV YEAR",
+    year: 'IV YEAR',
   },
-];
+]
 
 export default function SignUp() {
   // const isValid = departments && year;
   const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: "background.paper",
-    boxShadow: "0 0 20px rgba(0, 0, 0, 0.2)",
+    bgcolor: 'background.paper',
+    boxShadow: '0 0 20px rgba(0, 0, 0, 0.2)',
     p: 4,
-  };
+  }
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log(data);
-    let formValues = {};
-    data.append("image", id);
-    data.append("yearOfStudy", year);
-    data.append("department", departments);
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    console.log(data)
+    let formValues = {}
+    data.append('image', id)
+    data.append('yearOfStudy', year)
+    data.append('department', departments)
 
     for (let [key, value] of data.entries()) {
-      formValues[key] = value;
+      formValues[key] = value
     }
-    console.log(formValues);
+    console.log(formValues)
 
     await axios
-      .post("http://localhost:8080/signup", data)
+      .post(`http://${import.meta.env.VITE_LOCAL_URL}/signup`, data)
       .then((Response) => {
-        console.log(Response);
+        console.log(Response)
       })
       .catch((error) => {
-        console.error(error);
-      });
-  };
+        console.error(error)
+      })
+  }
 
   const theme = createTheme({
     palette: {
       background: {
-        default: "#000000", // Light grey background
+        default: '#000000', // Light grey background
       },
       primary: {
-        main: "#000000", // Blue for primary actions and highlights
+        main: '#000000', // Blue for primary actions and highlights
       },
       secondary: {
-        main: "#000000", // Pink for secondary actions and highlights
+        main: '#000000', // Pink for secondary actions and highlights
       },
     },
-  });
+  })
 
-  const [id, setIdImage] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [year, setYear] = useState("");
-  const [departments, setDepartments] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [phoneNumberError, setPhoneNumberError] = useState(false);
-  const [open, setopen] = useState(false);
-  const [otp, setOtp] = useState("");
-  const [otpError, setOtpError] = useState("");
+  const [id, setIdImage] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [year, setYear] = useState('')
+  const [departments, setDepartments] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState(false)
+  const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [phoneNumberError, setPhoneNumberError] = useState(false)
+  const [open, setopen] = useState(false)
+  const [otp, setOtp] = useState('')
+  const [otpError, setOtpError] = useState('')
 
   const handleSignUp = () => {
-    setopen(true);
-  };
+    setopen(true)
+  }
 
   const handleClose = () => {
-    setopen(false);
-  };
+    setopen(false)
+  }
 
   const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
-    console.log(event.target.value);
-    setPhoneNumberError(!/^[7-9][0-9]{9}$/.test(event.target.value));
-  };
+    setPhoneNumber(event.target.value)
+    console.log(event.target.value)
+    setPhoneNumberError(!/^[7-9][0-9]{9}$/.test(event.target.value))
+  }
 
   const handleOtpChange = (event) => {
-    setOtp(event.target.value);
-    setOtpError("");
-  };
+    setOtp(event.target.value)
+    setOtpError('')
+  }
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-    setPasswordError(event.target.value.length < 8);
-  };
+    setPassword(event.target.value)
+    setPasswordError(event.target.value.length < 8)
+  }
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-    setEmailError(!/^[A-Z0-9._%+-]+@skcet\.ac\.in$/i.test(event.target.value));
-  };
+    setEmail(event.target.value)
+    setEmailError(!/^[A-Z0-9._%+-]+@skcet\.ac\.in$/i.test(event.target.value))
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const handleOtpVerification = async (event) => {
-    event.preventDefault();
-    handleSignUp();
+    event.preventDefault()
+    handleSignUp()
     axios
-      .get(`http://localhost:8080/verify/${otp}`)
+      .get(`http://${import.meta.env.VITE_LOCAL_URL}/verify/${otp}`)
       .then((Response) => {
-        console.log(Response);
+        console.log(Response)
         if (Response.status === 202) {
-          setopen(false);
-          navigate("/");
+          setopen(false)
+          navigate('/')
         } else {
-          setOtpError("Invalid OTP. Please try again.");
-          setopen(true);
+          setOtpError('Invalid OTP. Please try again.')
+          setopen(true)
         }
       })
       .catch((error) => {
-        setOtpError("Invalid OTP. Please try again.");
-        console.error(error);
-      });
-  };
+        setOtpError('Invalid OTP. Please try again.')
+        console.error(error)
+      })
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -240,7 +240,7 @@ export default function SignUp() {
         container
         component="main"
         sx={{
-          height: "100vh",
+          height: '100vh',
         }}
       >
         <CssBaseline />
@@ -251,14 +251,14 @@ export default function SignUp() {
           md={7}
           sx={{
             // background: "linear-gradient(144deg, #af40ff, black 30%, #1852f4)",
-            backgroundImage: "url(/images/signup_bg.webp)",
-            backgroundRepeat: "no-repeat",
+            backgroundImage: 'url(/images/signup_bg.webp)',
+            backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
-              t.palette.mode === "light"
+              t.palette.mode === 'light'
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         />
         {/* <CssBaseline /> */}
@@ -266,13 +266,13 @@ export default function SignUp() {
           <Box
             sx={{
               marginTop: 7,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "10px",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '10px',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -291,27 +291,27 @@ export default function SignUp() {
                     name="firstName"
                     required
                     onChange={(event) => {
-                      setFirstName(event);
+                      setFirstName(event)
                     }}
                     fullWidth
                     id="firstName"
                     label="First Name"
                     autoFocus
                     InputLabelProps={{
-                      style: { color: "black" },
+                      style: { color: 'black' },
                     }}
                     InputProps={{
-                      style: { color: "white" },
+                      style: { color: 'white' },
                       sx: {
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#f4f4f4",
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: '#f4f4f4',
                           },
-                          "&:hover fieldset": {
-                            borderColor: "white",
+                          '&:hover fieldset': {
+                            borderColor: 'white',
                           },
-                          "&.Mui-focused fieldset": {
-                            borderColor: "white",
+                          '&.Mui-focused fieldset': {
+                            borderColor: 'white',
                           },
                         },
                       },
@@ -323,27 +323,27 @@ export default function SignUp() {
                     required
                     fullWidth
                     onChange={(event) => {
-                      setLastName(event);
+                      setLastName(event)
                     }}
                     id="lastName"
                     label="Last Name"
                     name="lastName"
                     autoComplete="family-name"
                     InputLabelProps={{
-                      style: { color: "black" },
+                      style: { color: 'black' },
                     }}
                     InputProps={{
-                      style: { color: "white" },
+                      style: { color: 'white' },
                       sx: {
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "#f4f4f4",
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: '#f4f4f4',
                           },
-                          "&:hover fieldset": {
-                            borderColor: "white",
+                          '&:hover fieldset': {
+                            borderColor: 'white',
                           },
-                          "&.Mui-focused fieldset": {
-                            borderColor: "white",
+                          '&.Mui-focused fieldset': {
+                            borderColor: 'white',
                           },
                         },
                       },
@@ -364,23 +364,23 @@ export default function SignUp() {
                     helperText={
                       emailError
                         ? "Please ensure your email address ends with '@skcet.ac.in'."
-                        : ""
+                        : ''
                     }
                     InputLabelProps={{
-                      style: { color: "black" },
+                      style: { color: 'black' },
                     }}
                     InputProps={{
-                      style: { color: "white" },
+                      style: { color: 'white' },
                       sx: {
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "white",
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: 'white',
                           },
-                          "&:hover fieldset": {
-                            borderColor: "white",
+                          '&:hover fieldset': {
+                            borderColor: 'white',
                           },
-                          "&.Mui-focused fieldset": {
-                            borderColor: "white",
+                          '&.Mui-focused fieldset': {
+                            borderColor: 'white',
                           },
                         },
                       },
@@ -401,24 +401,24 @@ export default function SignUp() {
                     error={passwordError}
                     helperText={
                       passwordError
-                        ? "Password must contain at least 8 characters"
-                        : ""
+                        ? 'Password must contain at least 8 characters'
+                        : ''
                     }
                     InputLabelProps={{
-                      style: { color: "black" },
+                      style: { color: 'black' },
                     }}
                     InputProps={{
-                      style: { color: "white" },
+                      style: { color: 'white' },
                       sx: {
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "white",
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: 'white',
                           },
-                          "&:hover fieldset": {
-                            borderColor: "white",
+                          '&:hover fieldset': {
+                            borderColor: 'white',
                           },
-                          "&.Mui-focused fieldset": {
-                            borderColor: "white",
+                          '&.Mui-focused fieldset': {
+                            borderColor: 'white',
                           },
                         },
                       },
@@ -438,28 +438,28 @@ export default function SignUp() {
                     onChange={handlePhoneNumberChange}
                     error={phoneNumberError}
                     InputLabelProps={{
-                      style: { color: "black" },
+                      style: { color: 'black' },
                     }}
                     InputProps={{
-                      style: { color: "white", borderBlockColor: "white" },
+                      style: { color: 'white', borderBlockColor: 'white' },
 
                       sx: {
-                        "& .MuiOutlinedInput-root": {
-                          "& fieldset": {
-                            borderColor: "white",
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: 'white',
                           },
-                          "&:hover fieldset": {
-                            borderColor: "white",
+                          '&:hover fieldset': {
+                            borderColor: 'white',
                           },
-                          "&.Mui-focused fieldset": {
-                            borderColor: "white",
+                          '&.Mui-focused fieldset': {
+                            borderColor: 'white',
                           },
                         },
                       },
                     }}
                   />
                   {phoneNumberError && (
-                    <FormHelperText style={{ color: "red", fontSize: "13px" }}>
+                    <FormHelperText style={{ color: 'red', fontSize: '13px' }}>
                       *Please enter a valid mobile number.
                     </FormHelperText>
                   )}
@@ -473,13 +473,13 @@ export default function SignUp() {
                     onChange={(event, value) => setDepartments(value.dept)}
                     autoHighlight
                     isOptionEqualToValue={(option, value) => {
-                      option.dept === value.dept;
+                      option.dept === value.dept
                     }}
                     getOptionLabel={(option) => option.dept}
                     renderOption={(props, option) => (
                       <Box
                         component="li"
-                        sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                        sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                         {...props}
                       >
                         {option.dept}
@@ -491,24 +491,24 @@ export default function SignUp() {
                         label="Department"
                         inputProps={{
                           ...params.inputProps,
-                          autoComplete: "new-password", // disable autocomplete and autofill
+                          autoComplete: 'new-password', // disable autocomplete and autofill
                         }}
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' },
                         }}
                         InputProps={{
                           ...params.InputProps,
-                          style: { color: "black" },
+                          style: { color: 'black' },
                           sx: {
-                            "& .MuiOutlinedInput-root": {
-                              "& fieldset": {
-                                borderColor: "black",
+                            '& .MuiOutlinedInput-root': {
+                              '& fieldset': {
+                                borderColor: 'black',
                               },
-                              "&:hover fieldset": {
-                                borderColor: "white",
+                              '&:hover fieldset': {
+                                borderColor: 'white',
                               },
-                              "&.Mui-focused fieldset": {
-                                borderColor: "white",
+                              '&.Mui-focused fieldset': {
+                                borderColor: 'white',
                               },
                             },
                           },
@@ -527,7 +527,7 @@ export default function SignUp() {
                     renderOption={(props, option) => (
                       <Box
                         component="li"
-                        sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                        sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                         {...props}
                       >
                         {option.year}
@@ -539,24 +539,24 @@ export default function SignUp() {
                         label="Year of Studying"
                         inputProps={{
                           ...params.inputProps,
-                          autoComplete: "new-password", // disable autocomplete and autofill
+                          autoComplete: 'new-password', // disable autocomplete and autofill
                         }}
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' },
                         }}
                         InputProps={{
                           ...params.InputProps,
-                          style: { color: "white" },
+                          style: { color: 'white' },
                           sx: {
-                            "& .MuiOutlinedInput-root": {
-                              "& fieldset": {
-                                borderColor: "white",
+                            '& .MuiOutlinedInput-root': {
+                              '& fieldset': {
+                                borderColor: 'white',
                               },
-                              "&:hover fieldset": {
-                                borderColor: "white",
+                              '&:hover fieldset': {
+                                borderColor: 'white',
                               },
-                              "&.Mui-focused fieldset": {
-                                borderColor: "white",
+                              '&.Mui-focused fieldset': {
+                                borderColor: 'white',
                               },
                             },
                           },
@@ -573,15 +573,15 @@ export default function SignUp() {
                     label="ID_CARD_IMG"
                     type="file"
                     onChange={(Event) => {
-                      setIdImage(Event.target.files[0]);
+                      setIdImage(Event.target.files[0])
                     }}
                     InputLabelProps={{
                       shrink: true,
-                      style: { color: "#f4f4f4" },
+                      style: { color: '#f4f4f4' },
                     }}
                   />
 
-                  <FormHelperText style={{ color: "#7bfcf9" }}>
+                  <FormHelperText style={{ color: '#7bfcf9' }}>
                     *Upload Your College_ID Image
                   </FormHelperText>
                 </Grid>
@@ -593,7 +593,7 @@ export default function SignUp() {
                     type="file"
                     InputLabelProps={{
                       shrink: true,
-                      style: { color: "#1976d2" },
+                      style: { color: '#1976d2' },
                     }}
                   />
                 </Grid>
@@ -614,7 +614,7 @@ export default function SignUp() {
                   !id
                 }
                 onClick={handleSignUp}
-                sx={{ mt: 3, mb: 2, backgroundColor: "white" }}
+                sx={{ mt: 3, mb: 2, backgroundColor: 'white' }}
               >
                 Sign Up
               </Button>
@@ -652,8 +652,8 @@ export default function SignUp() {
               label="Enter OTP"
               onChange={handleOtpChange}
             />
-            {otpError === "Invalid OTP. Please try again." && (
-              <FormHelperText style={{ color: "red", fontSize: "13px" }}>
+            {otpError === 'Invalid OTP. Please try again.' && (
+              <FormHelperText style={{ color: 'red', fontSize: '13px' }}>
                 {otpError}
               </FormHelperText>
             )}
@@ -666,5 +666,5 @@ export default function SignUp() {
         </Modal>
       </Grid>
     </ThemeProvider>
-  );
+  )
 }

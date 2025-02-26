@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="bg-primary">
         <div className="max-w-screen-lg px-4 sm:px-6 text-secondary sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
           <div className="p-5">
-            <h3 className="font-bold text-xl text-secondary">Eco connect</h3>
+            <h3 className="font-bold text-xl text-secondary">Eco Ride</h3>
           </div>
           <div className="p-5">
             <div className="text-sm uppercase text-secondary font-bold">
@@ -48,11 +48,11 @@ const Footer = () => {
               Contact us
             </div>
             <a className="my-3 block" href="/#">
-              123 Avinashi Road, Floor 4, Coimbatore, TN 641018, India
+              Sri Krishna Institutions, Coimbatore, TN, India - 641008
               <span className="text-secondary text-xs p-1"></span>
             </a>
             <a className="my-3 block" href="/#">
-              Eco_Connect@gmail.com
+              eco_ride@gmail.com
               <span className="text-secondary text-xs p-1"></span>
             </a>
           </div>

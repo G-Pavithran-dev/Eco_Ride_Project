@@ -7,85 +7,91 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from "@mui/material";
-import Navbar from "../NavBar/NavBar";
-import route from "./routedot.png";
-import car from "./Car.jpg";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { Button } from "../ui/button";
-import "./PublishedRideHistory.css";
+} from '@mui/material'
+import Navbar from '../NavBar/NavBar'
+import route from './routedot.png'
+import car from './Car.jpg'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { Button } from '../ui/button'
+import './PublishedRideHistory.css'
 // import {Tabs} from '../ui/tabs'
-import image1 from "./image1.png";
-import image2 from "./image2.png";
-import image3 from "./image3.png";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import image1 from './image1.png'
+import image2 from './image2.png'
+import image3 from './image3.png'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 const PublishedRideHistory = () => {
-  const logindata = useSelector((state) => state.loginReducer);
-  const [upcomingRideHistory, setUpcomingRideHistory] = useState([]);
-  const [onGoingRideHistory, setOnGoingRideHistory] = useState([]);
-  const [onCompletedRideHistory, setCompletedRideHistory] = useState([]);
+  const logindata = useSelector((state) => state.loginReducer)
+  const [upcomingRideHistory, setUpcomingRideHistory] = useState([])
+  const [onGoingRideHistory, setOnGoingRideHistory] = useState([])
+  const [onCompletedRideHistory, setCompletedRideHistory] = useState([])
   useEffect(() => {
-    console.log(upcomingRideHistory);
-  }, [upcomingRideHistory]);
+    console.log(upcomingRideHistory)
+  }, [upcomingRideHistory])
 
   const getall = () => {
-    console.log("login data email is ", logindata.email);
+    console.log('login data email is ', logindata.email)
     axios
       .get(
-        `http://localhost:8080/app/userRideHistory/getByUser/${logindata.email}/upcoming`
+        `http://${
+          import.meta.env.VITE_LOCAL_URL
+        }/app/userRideHistory/getByUser/${logindata.email}/upcoming`
       )
       .then((res) => {
-        setUpcomingRideHistory(res.data);
+        setUpcomingRideHistory(res.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
     axios
       .get(
-        `http://localhost:8080/app/userRideHistory/getByUser/${logindata.email}/ongoing`
+        `http://${
+          import.meta.env.VITE_LOCAL_URL
+        }/app/userRideHistory/getByUser/${logindata.email}/ongoing`
       )
       .then((res) => {
-        setOnGoingRideHistory(res.data);
+        setOnGoingRideHistory(res.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
     axios
       .get(
-        `http://localhost:8080/app/userRideHistory/getByUser/${logindata.email}/completed`
+        `http://${
+          import.meta.env.VITE_LOCAL_URL
+        }/app/userRideHistory/getByUser/${logindata.email}/completed`
       )
       .then((res) => {
-        setCompletedRideHistory(res.data);
+        setCompletedRideHistory(res.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  };
+        console.log(err)
+      })
+  }
 
   useEffect(() => {
-    getall();
-  }, [logindata]);
+    getall()
+  }, [logindata])
   return (
     <div
       style={{
-        backgroundColor: " #f6f6f6",
-        paddingTop: "4vh",
-        minHeight: "91dvh",
+        backgroundColor: ' #f6f6f6',
+        paddingTop: '4vh',
+        minHeight: '91dvh',
       }}
     >
       <div
         style={{
-          Top: "0%",
-          display: "flex",
-          justifyContent: "center",
-          paddingTop: "0%",
-          width: "100%",
-          paddingBottom: "2%",
+          Top: '0%',
+          display: 'flex',
+          justifyContent: 'center',
+          paddingTop: '0%',
+          width: '100%',
+          paddingBottom: '2%',
         }}
       >
-        <div style={{ width: "80%", backgroundColor: "white", height: "90%" }}>
+        <div style={{ width: '80%', backgroundColor: 'white', height: '90%' }}>
           <Tabs defaultValue="UpComing" className="w-[100%]  justify-center">
             <TabsList className="grid grid-cols-3 w-[100%] h-[8dvh] bg-gray-200">
               <TabsTrigger value="Completed" className="text-lg ">
@@ -102,82 +108,92 @@ const PublishedRideHistory = () => {
               value="Completed"
               className="overflow-y-scroll h-[70dvh]"
             >
-                 {onCompletedRideHistory && onCompletedRideHistory.length > 0 ? (
+              {onCompletedRideHistory && onCompletedRideHistory.length > 0 ? (
                 onCompletedRideHistory.map((ride) => (
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "2vh",
-                      flexDirection: "column",
-                      fontSize: "0.7rem",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      padding: '2vh',
+                      flexDirection: 'column',
+                      fontSize: '0.7rem',
                     }}
                   >
                     <div
                       style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        position: "relative",
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        position: 'relative',
                       }}
                     >
                       <div
                         style={{
-                          backgroundColor: "White",
-                          width: "80%",
-                          height: "23vh",
-                          padding: "1vh",
-                          paddingLeft: "7%",
+                          backgroundColor: 'White',
+                          width: '80%',
+                          height: '23vh',
+                          padding: '1vh',
+                          paddingLeft: '7%',
                         }}
                       >
-                                                <Typography variant="h5" sx={{ fontSize: "0.8rem" }}>{ride.bookRide.locationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.bookRide.locationFirstName} </Typography>
+                        <Typography variant="h5" sx={{ fontSize: '0.8rem' }}>
+                          {ride.bookRide.locationFirstName ===
+                          'Sri Krishna College of Engineering and Technology'
+                            ? 'SKCET'
+                            : ride.bookRide.locationFirstName}{' '}
+                        </Typography>
 
                         <img
                           src={route}
-                          style={{ height: "48%", alignContent: "center" }}
+                          style={{ height: '48%', alignContent: 'center' }}
                           alt="Route"
                         />
-                                                <Typography variant="h5" sx={{ fontSize: "0.8rem" }}> {ride.bookRide.goingLocationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.bookRide.goingLocationFirstName}</Typography>
-
+                        <Typography variant="h5" sx={{ fontSize: '0.8rem' }}>
+                          {' '}
+                          {ride.bookRide.goingLocationFirstName ===
+                          'Sri Krishna College of Engineering and Technology'
+                            ? 'SKCET'
+                            : ride.bookRide.goingLocationFirstName}
+                        </Typography>
                       </div>
 
                       <div
                         style={{
-                          width: "100%",
-                          padding: "1vh",
-                          position: "relative",
-                          top: "1vh",
+                          width: '100%',
+                          padding: '1vh',
+                          position: 'relative',
+                          top: '1vh',
                         }}
                       >
                         <div
                           style={{
-                            height: "23dvh",
-                            position: "absolute",
-                            bottom: "0%",
+                            height: '23dvh',
+                            position: 'absolute',
+                            bottom: '0%',
                           }}
                         >
                           <Typography
                             variant="h4"
-                            sx={{ fontSize: "1.3rem", fontWeight: "600" }}
+                            sx={{ fontSize: '1.3rem', fontWeight: '600' }}
                           >
                             {ride.bookRide.name}
                           </Typography>
                           <Typography
                             sx={{
-                              lineHeight: "1.2rem",
-                              marginTop: "5%",
-                              fontSize: "0.9rem",
+                              lineHeight: '1.2rem',
+                              marginTop: '5%',
+                              fontSize: '0.9rem',
                             }}
                           >
                             B-tech IT
                           </Typography>
                           <Typography
-                            sx={{ lineHeight: "2rem", fontSize: "0.9rem" }}
+                            sx={{ lineHeight: '2rem', fontSize: '0.9rem' }}
                           >
                             {ride.bookRide.email}
                           </Typography>
                           <Typography
-                            sx={{ lineHeight: "2rem", fontSize: "0.9rem" }}
+                            sx={{ lineHeight: '2rem', fontSize: '0.9rem' }}
                           >
                             {ride.bookRide.phone}
                           </Typography>
@@ -186,30 +202,30 @@ const PublishedRideHistory = () => {
 
                       <div
                         style={{
-                          backgroundColor: "White",
-                          width: "70%",
-                          height: "23dvh",
-                          padding: "1vh",
+                          backgroundColor: 'White',
+                          width: '70%',
+                          height: '23dvh',
+                          padding: '1vh',
                         }}
                       >
                         <div
                           style={{
-                            height: "23dvh",
-                            position: "absolute",
-                            bottom: "0%",
+                            height: '23dvh',
+                            position: 'absolute',
+                            bottom: '0%',
                           }}
                         >
                           <img
                             src={car}
-                            style={{ height: "55%", alignContent: "center" }}
+                            style={{ height: '55%', alignContent: 'center' }}
                             alt="Car"
                           />
                           <Typography
                             variant="h6"
                             sx={{
-                              paddingLeft: "15%",
-                              fontSize: "0.9rem",
-                              fontWeight: "500",
+                              paddingLeft: '15%',
+                              fontSize: '0.9rem',
+                              fontWeight: '500',
                             }}
                           >
                             {ride.bookRide.carNumber}
@@ -217,16 +233,19 @@ const PublishedRideHistory = () => {
                         </div>
                       </div>
 
-                      <div style={{ marginTop: "3%", width: "85%" }}>
+                      <div style={{ marginTop: '3%', width: '85%' }}>
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{ display: 'flex', justifyContent: 'center' }}
                         >
-                           <Typography
-                            sx={{ lineHeight: "2rem", fontSize: "0.9rem",fontWeight:"700" }}
+                          <Typography
+                            sx={{
+                              lineHeight: '2rem',
+                              fontSize: '0.9rem',
+                              fontWeight: '700',
+                            }}
                           >
                             Ride has been completed
                           </Typography>
-                          
                         </div>
                       </div>
                     </div>
@@ -244,82 +263,92 @@ const PublishedRideHistory = () => {
               value="OnGoing"
               className="overflow-y-scroll h-[70dvh]"
             >
-                {onGoingRideHistory && onGoingRideHistory.length > 0 ? (
+              {onGoingRideHistory && onGoingRideHistory.length > 0 ? (
                 onGoingRideHistory.map((ride) => (
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "2vh",
-                      flexDirection: "column",
-                      fontSize: "0.7rem",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      padding: '2vh',
+                      flexDirection: 'column',
+                      fontSize: '0.7rem',
                     }}
                   >
                     <div
                       style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        position: "relative",
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        position: 'relative',
                       }}
                     >
                       <div
                         style={{
-                          backgroundColor: "White",
-                          width: "80%",
-                          height: "23vh",
-                          padding: "1vh",
-                          paddingLeft: "7%",
+                          backgroundColor: 'White',
+                          width: '80%',
+                          height: '23vh',
+                          padding: '1vh',
+                          paddingLeft: '7%',
                         }}
                       >
-                                                <Typography variant="h5" sx={{ fontSize: "0.8rem" }}>{ride.bookRide.locationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.bookRide.locationFirstName} </Typography>
+                        <Typography variant="h5" sx={{ fontSize: '0.8rem' }}>
+                          {ride.bookRide.locationFirstName ===
+                          'Sri Krishna College of Engineering and Technology'
+                            ? 'SKCET'
+                            : ride.bookRide.locationFirstName}{' '}
+                        </Typography>
 
                         <img
                           src={route}
-                          style={{ height: "48%", alignContent: "center" }}
+                          style={{ height: '48%', alignContent: 'center' }}
                           alt="Route"
                         />
-                                                <Typography variant="h5" sx={{ fontSize: "0.8rem" }}> {ride.bookRide.goingLocationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.bookRide.goingLocationFirstName}</Typography>
-
+                        <Typography variant="h5" sx={{ fontSize: '0.8rem' }}>
+                          {' '}
+                          {ride.bookRide.goingLocationFirstName ===
+                          'Sri Krishna College of Engineering and Technology'
+                            ? 'SKCET'
+                            : ride.bookRide.goingLocationFirstName}
+                        </Typography>
                       </div>
 
                       <div
                         style={{
-                          width: "100%",
-                          padding: "1vh",
-                          position: "relative",
-                          top: "1vh",
+                          width: '100%',
+                          padding: '1vh',
+                          position: 'relative',
+                          top: '1vh',
                         }}
                       >
                         <div
                           style={{
-                            height: "23dvh",
-                            position: "absolute",
-                            bottom: "0%",
+                            height: '23dvh',
+                            position: 'absolute',
+                            bottom: '0%',
                           }}
                         >
                           <Typography
                             variant="h4"
-                            sx={{ fontSize: "1.3rem", fontWeight: "600" }}
+                            sx={{ fontSize: '1.3rem', fontWeight: '600' }}
                           >
                             {ride.bookRide.name}
                           </Typography>
-                          <Typography
+                          {/* <Typography
                             sx={{
-                              lineHeight: "1.2rem",
-                              marginTop: "5%",
-                              fontSize: "0.9rem",
+                              lineHeight: '1.2rem',
+                              marginTop: '5%',
+                              fontSize: '0.9rem',
                             }}
                           >
-                            B-tech IT
-                          </Typography>
+                            {ride.bookRide.department}
+                          </Typography> */}
                           <Typography
-                            sx={{ lineHeight: "2rem", fontSize: "0.9rem" }}
+                            sx={{ lineHeight: '2rem', fontSize: '0.9rem' }}
                           >
                             {ride.bookRide.email}
                           </Typography>
                           <Typography
-                            sx={{ lineHeight: "2rem", fontSize: "0.9rem" }}
+                            sx={{ lineHeight: '2rem', fontSize: '0.9rem' }}
                           >
                             {ride.bookRide.phone}
                           </Typography>
@@ -328,30 +357,30 @@ const PublishedRideHistory = () => {
 
                       <div
                         style={{
-                          backgroundColor: "White",
-                          width: "100%",
-                          height: "23dvh",
-                          padding: "1vh",
+                          backgroundColor: 'White',
+                          width: '100%',
+                          height: '23dvh',
+                          padding: '1vh',
                         }}
                       >
                         <div
                           style={{
-                            height: "23dvh",
-                            position: "absolute",
-                            bottom: "0%",
+                            height: '23dvh',
+                            position: 'absolute',
+                            bottom: '0%',
                           }}
                         >
                           <img
                             src={car}
-                            style={{ height: "55%", alignContent: "center" }}
+                            style={{ height: '55%', alignContent: 'center' }}
                             alt="Car"
                           />
                           <Typography
                             variant="h6"
                             sx={{
-                              paddingLeft: "15%",
-                              fontSize: "0.9rem",
-                              fontWeight: "500",
+                              paddingLeft: '15%',
+                              fontSize: '0.9rem',
+                              fontWeight: '500',
                             }}
                           >
                             {ride.bookRide.carNumber}
@@ -359,32 +388,14 @@ const PublishedRideHistory = () => {
                         </div>
                       </div>
 
-                      <div style={{ marginTop: "3%", width: "65%" }}>
+                      <div style={{ marginTop: '3%', width: '65%' }}>
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{ display: 'flex', justifyContent: 'center' }}
                         >
                           <Button
-                            className="w-[55%] text-sm"
-                            onClick={() => {
-                              axios
-                                .delete(
-                                  `http://localhost:8080/app/deleteRide/${logindata.email}/${ride.bookRide.id}`
-                                )
-                                .then(() => {
-                                  getall();
-                                });
-                            }}
+                            className="w-auto text-sm"
                           >
-                            Cancel Ride
-                          </Button>
-                          <Button
-                            onClick={() => {
-                              axios.put(
-                                `http://localhost:8080/app/updateRide/${logindata.email}/${ride.bookRide.id}/completed`
-                              );
-                            }}
-                          >
-                            completed
+                            Ride is Ongoing
                           </Button>
                         </div>
                       </div>
@@ -407,81 +418,91 @@ const PublishedRideHistory = () => {
                 upcomingRideHistory.map((ride) => (
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "2vh",
-                      flexDirection: "column",
-                      fontSize: "0.7rem",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      padding: '2vh',
+                      flexDirection: 'column',
+                      fontSize: '0.7rem',
                     }}
                   >
                     <div
                       style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        position: "relative",
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        position: 'relative',
                       }}
                     >
                       <div
                         style={{
-                          backgroundColor: "White",
-                          width: "80%",
-                          height: "23vh",
-                          padding: "1vh",
-                          paddingLeft: "7%",
+                          backgroundColor: 'White',
+                          width: '80%',
+                          height: '23vh',
+                          padding: '1vh',
+                          paddingLeft: '7%',
                         }}
                       >
-                        <Typography variant="h5" >
-                        <Typography variant="h5" sx={{ fontSize: "0.8rem" }}>{ride.bookRide.locationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.bookRide.locationFirstName} </Typography>
+                        <Typography variant="h5">
+                          <Typography variant="h5" sx={{ fontSize: '0.8rem' }}>
+                            {ride.bookRide.locationFirstName ===
+                            'Sri Krishna College of Engineering and Technology'
+                              ? 'SKCET'
+                              : ride.bookRide.locationFirstName}{' '}
+                          </Typography>
                         </Typography>
                         <img
                           src={route}
-                          style={{ height: "48%", alignContent: "center" }}
+                          style={{ height: '48%', alignContent: 'center' }}
                           alt="Route"
                         />
-                        <Typography variant="h5" sx={{ fontSize: "0.8rem" }}>
-                        <Typography variant="h5" sx={{ fontSize: "0.8rem" }}> {ride.bookRide.goingLocationFirstName==="Sri Krishna College of Engineering and Technology"?"SKCET":ride.bookRide.goingLocationFirstName}</Typography>
-                          
+                        <Typography variant="h5" sx={{ fontSize: '0.8rem' }}>
+                          <Typography variant="h5" sx={{ fontSize: '0.8rem' }}>
+                            {' '}
+                            {ride.bookRide.goingLocationFirstName ===
+                            'Sri Krishna College of Engineering and Technology'
+                              ? 'SKCET'
+                              : ride.bookRide.goingLocationFirstName}
+                          </Typography>
                         </Typography>
                       </div>
 
                       <div
                         style={{
-                          width: "100%",
-                          padding: "1vh",
-                          position: "relative",
-                          top: "1vh",
+                          width: '100%',
+                          padding: '1vh',
+                          position: 'relative',
+                          top: '1vh',
                         }}
                       >
                         <div
                           style={{
-                            height: "23dvh",
-                            position: "absolute",
-                            bottom: "0%",
+                            height: '23dvh',
+                            position: 'absolute',
+                            bottom: '0%',
                           }}
                         >
                           <Typography
                             variant="h4"
-                            sx={{ fontSize: "1.3rem", fontWeight: "600" }}
+                            sx={{ fontSize: '1.3rem', fontWeight: '600' }}
                           >
                             {ride.bookRide.name}
                           </Typography>
                           <Typography
                             sx={{
-                              lineHeight: "1.2rem",
-                              marginTop: "5%",
-                              fontSize: "0.9rem",
+                              lineHeight: '1.2rem',
+                              marginTop: '5%',
+                              fontSize: '0.9rem',
                             }}
                           >
                             B-tech IT
                           </Typography>
                           <Typography
-                            sx={{ lineHeight: "2rem", fontSize: "0.9rem" }}
+                            sx={{ lineHeight: '2rem', fontSize: '0.9rem' }}
                           >
                             {ride.bookRide.email}
                           </Typography>
                           <Typography
-                            sx={{ lineHeight: "2rem", fontSize: "0.9rem" }}
+                            sx={{ lineHeight: '2rem', fontSize: '0.9rem' }}
                           >
                             {ride.bookRide.phone}
                           </Typography>
@@ -490,30 +511,30 @@ const PublishedRideHistory = () => {
 
                       <div
                         style={{
-                          backgroundColor: "White",
-                          width: "100%",
-                          height: "23dvh",
-                          padding: "1vh",
+                          backgroundColor: 'White',
+                          width: '100%',
+                          height: '23dvh',
+                          padding: '1vh',
                         }}
                       >
                         <div
                           style={{
-                            height: "23dvh",
-                            position: "absolute",
-                            bottom: "0%",
+                            height: '23dvh',
+                            position: 'absolute',
+                            bottom: '0%',
                           }}
                         >
                           <img
                             src={car}
-                            style={{ height: "55%", alignContent: "center" }}
+                            style={{ height: '55%', alignContent: 'center' }}
                             alt="Car"
                           />
                           <Typography
                             variant="h6"
                             sx={{
-                              paddingLeft: "15%",
-                              fontSize: "0.9rem",
-                              fontWeight: "500",
+                              paddingLeft: '15%',
+                              fontSize: '0.9rem',
+                              fontWeight: '500',
                             }}
                           >
                             {ride.bookRide.carNumber}
@@ -521,29 +542,35 @@ const PublishedRideHistory = () => {
                         </div>
                       </div>
 
-                      <div style={{ marginTop: "3%", width: "65%" }}>
+                      <div style={{ marginTop: '3%', width: '65%' }}>
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{ display: 'flex', justifyContent: 'center' }}
                         >
                           <Button
                             className="w-[55%] text-sm"
                             onClick={() => {
                               axios
                                 .delete(
-                                  `http://localhost:8080/app/deleteRide/${logindata.email}/${ride.bookRide.id}`
+                                  `http://${
+                                    import.meta.env.VITE_LOCAL_URL
+                                  }/app/deleteRide/${logindata.email}/${
+                                    ride.bookRide.id
+                                  }`
                                 )
                                 .then(() => {
-                                  getall();
-                                });
-                                axios.put(
-                                  `http://localhost:8080/app/bookride/updateseatsAvailable/onCancelation/${ride.bookRide.id}`
-                                )
+                                  getall()
+                                })
+                              axios.put(
+                                `http://${
+                                  import.meta.env.VITE_LOCAL_URL
+                                }/app/bookride/updateseatsAvailable/onCancelation/${
+                                  ride.bookRide.id
+                                }`
+                              )
                             }}
                           >
                             Cancel Ride
                           </Button>
-                          
-                         
                         </div>
                       </div>
                     </div>
@@ -561,7 +588,7 @@ const PublishedRideHistory = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PublishedRideHistory;
+export default PublishedRideHistory

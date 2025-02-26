@@ -5,15 +5,15 @@ import {
   Box,
   Autocomplete,
   Grid,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import "./RideCard.css";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+} from '@mui/material'
+import { useEffect, useState } from 'react'
+import './RideCard.css'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
-import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { motion } from 'framer-motion'
+import { useSelector } from 'react-redux'
 
 const RideCard = () => {
   //ToDo: state maintanance
@@ -26,32 +26,32 @@ const RideCard = () => {
   // }
 
   // updateState('status', 'asfdsd')
-  const [status, setStatus] = useState("");
-  const [locationFirstName, setLocationFirstName] = useState("");
-  const [goingLocationFirstName, setGoingLocationFirstName] = useState("");
-  const [leaving, setLeaving] = useState("");
-  const [going, setGoing] = useState("");
-  const [availableSeats, setSeats] = useState("");
-  const [price, setPrice] = useState("");
-  const [carName, setCarName] = useState("");
-  const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
+  const [status, setStatus] = useState('')
+  const [locationFirstName, setLocationFirstName] = useState('')
+  const [goingLocationFirstName, setGoingLocationFirstName] = useState('')
+  const [leaving, setLeaving] = useState('')
+  const [going, setGoing] = useState('')
+  const [availableSeats, setSeats] = useState('')
+  const [price, setPrice] = useState('')
+  const [carName, setCarName] = useState('')
+  const [date, setDate] = useState('')
+  const [startTime, setStartTime] = useState('')
   // const [endTime, setendTime] = useState("");
-  const [carNumber, setCarNumber] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [endTime, setEndTime] = useState("2:30 PM");
+  const [carNumber, setCarNumber] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [endTime, setEndTime] = useState('2:30 PM')
 
-  const [suggestions, setSuggestions] = useState([]);
-  const [leavingFromLatitude, setLeavingFromLatitude] = useState(null);
-  const [leavingFromLongitude, setLeavingFromLongitude] = useState(null);
-  const [goingToLatitude, setGoingToLatitude] = useState(null);
-  const [goingToLongitude, setGoingToLongitude] = useState(null);
-  const [errors, setErrors] = useState({});
+  const [suggestions, setSuggestions] = useState([])
+  const [leavingFromLatitude, setLeavingFromLatitude] = useState(null)
+  const [leavingFromLongitude, setLeavingFromLongitude] = useState(null)
+  const [goingToLatitude, setGoingToLatitude] = useState(null)
+  const [goingToLongitude, setGoingToLongitude] = useState(null)
+  const [errors, setErrors] = useState({})
 
-  const navigate = useNavigate();
-  const logindata = useSelector((state) => state.loginReducer);
+  const navigate = useNavigate()
+  const logindata = useSelector((state) => state.loginReducer)
 
   // useEffect(() => {
   //   console.log(".");
@@ -73,36 +73,36 @@ const RideCard = () => {
   //   console.log(".");
   // });
   // console.log("login data from ride card", logindata);
-  console.log("Location first name" + locationFirstName);
+  console.log('Location first name' + locationFirstName)
   const handleSubmit = (event) => {
-    setName(logindata.firstName + " " + logindata.lastName);
-    setEmail(logindata.email);
-    setPhone(logindata.phoneNumber);
-    event.preventDefault();
-    const newErrors = {};
-    const no = "no";
-    if (!leaving) newErrors.leaving = "This field is required";
-    if (!going) newErrors.going = "This field is required";
-    if (!availableSeats) newErrors.availableSeats = "This field is required";
-    if (!price) newErrors.price = "This field is required";
-    if (!carName) newErrors.carName = "This field is required";
-    if (!date) newErrors.date = "This field is required";
-    if (!startTime) newErrors.startTime = "This field is required";
-    if (!carNumber) newErrors.carNumber = "This field is required";
+    setName(logindata.firstName + ' ' + logindata.lastName)
+    setEmail(logindata.email)
+    setPhone(logindata.phoneNumber)
+    event.preventDefault()
+    const newErrors = {}
+    const no = 'no'
+    if (!leaving) newErrors.leaving = 'This field is required'
+    if (!going) newErrors.going = 'This field is required'
+    if (!availableSeats) newErrors.availableSeats = 'This field is required'
+    if (!price) newErrors.price = 'This field is required'
+    if (!carName) newErrors.carName = 'This field is required'
+    if (!date) newErrors.date = 'This field is required'
+    if (!startTime) newErrors.startTime = 'This field is required'
+    if (!carNumber) newErrors.carNumber = 'This field is required'
 
-    setErrors(newErrors);
+    setErrors(newErrors)
 
     if (
       goingLocationFirstName ===
-      "Sri Krishna College of Engineering and Technology"
+      'Sri Krishna College of Engineering and Technology'
     ) {
-      console.log("hiiiiii", goingLocationFirstName);
-      setGoingLocationFirstName("SKCET");
-      console.log(goingLocationFirstName);
+      console.log('hiiiiii', goingLocationFirstName)
+      setGoingLocationFirstName('SKCET')
+      console.log(goingLocationFirstName)
     }
     if (Object.keys(newErrors).length === 0) {
       const rideDetails = {
-        name: logindata.firstName + " " + logindata.lastName,
+        name: logindata.firstName + ' ' + logindata.lastName,
         email: logindata.email,
         phone: logindata.phoneNumber,
         leaving,
@@ -123,103 +123,106 @@ const RideCard = () => {
         leavingFromLongitude,
         goingToLatitude,
         goingToLongitude,
-      };
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
-      console.log("Ride details are ", rideDetails);
+      }
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
+      console.log('Ride details are ', rideDetails)
       axios
-        .post("http://localhost:8080/app/createride", rideDetails)
+        .post(
+          `http://${import.meta.env.VITE_LOCAL_URL}/app/createride`,
+          rideDetails
+        )
         .then((response) => {
-          setStatus("success");
+          setStatus('success')
 
           Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Ride details submitted successfully!",
-          });
+            icon: 'success',
+            title: 'Success',
+            text: 'Ride details submitted successfully!',
+          })
         })
         .catch((error) => {
           console.error(
-            "There was an error submitting the ride details:",
+            'There was an error submitting the ride details:',
             error
-          );
-          setStatus("error");
+          )
+          setStatus('error')
           Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "There was an error submitting the ride details.",
-          });
-        });
+            icon: 'error',
+            title: 'Error',
+            text: 'There was an error submitting the ride details.',
+          })
+        })
     }
-  };
+  }
 
   useEffect(() => {
-    if (leaving !== "") {
+    if (leaving !== '') {
       fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${leaving}&format=json&apiKey=7150d3d1879642babb4e29c827ae645b`
       )
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
+          console.log(result)
           const newSuggestions = result.results.map((item) => ({
             label: `${item.address_line1} ${item.address_line2}`,
             value: item,
-          }));
-          setSuggestions(newSuggestions);
+          }))
+          setSuggestions(newSuggestions)
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) => console.log('error', error))
     }
-  }, [leaving]);
+  }, [leaving])
   useEffect(() => {
-    if (going !== "") {
+    if (going !== '') {
       fetch(
         `https://api.geoapify.com/v1/geocode/autocomplete?text=${going}&format=json&apiKey=7150d3d1879642babb4e29c827ae645b`
       )
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
+          console.log(result)
           const newSuggestions = result.results.map((item) => ({
             label: `${item.address_line1} ${item.address_line2}`,
             value: item,
-          }));
-          setSuggestions(newSuggestions);
+          }))
+          setSuggestions(newSuggestions)
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) => console.log('error', error))
     }
-  }, [going]);
+  }, [going])
   return (
     <div
       style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        height: "100vh",
-        position: "relative",
-        alignItems: "center",
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        height: '100vh',
+        position: 'relative',
+        alignItems: 'center',
       }}
     >
       <Paper
         className="paper-comp"
         elevation={5}
         sx={{
-          borderRadius: "20px",
-          height: "auto",
-          width: "40%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "50px",
+          borderRadius: '20px',
+          height: 'auto',
+          width: '40%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          padding: '50px',
 
-          backgroundColor: "white",
-          overflow: "auto",
-          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+          backgroundColor: 'white',
+          overflow: 'auto',
+          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Box
@@ -244,14 +247,14 @@ const RideCard = () => {
                 )}
                 onChange={(event, newValue) => {
                   if (newValue) {
-                    setLeaving(newValue.label);
-                    setLeavingFromLatitude(newValue.value.lat);
-                    setLeavingFromLongitude(newValue.value.lon);
-                    setLocationFirstName(newValue.value.address_line1);
+                    setLeaving(newValue.label)
+                    setLeavingFromLatitude(newValue.value.lat)
+                    setLeavingFromLongitude(newValue.value.lon)
+                    setLocationFirstName(newValue.value.address_line1)
                   } else {
-                    setLeaving("");
-                    setLeavingFromLatitude(null);
-                    setLeavingFromLongitude(null);
+                    setLeaving('')
+                    setLeavingFromLatitude(null)
+                    setLeavingFromLongitude(null)
                   }
                 }}
               />
@@ -270,14 +273,14 @@ const RideCard = () => {
                 )}
                 onChange={(event, newValue) => {
                   if (newValue) {
-                    setGoing(newValue.label);
-                    setGoingLocationFirstName(newValue.value.address_line1);
-                    setGoingToLatitude(newValue.value.lat);
-                    setGoingToLongitude(newValue.value.lon);
+                    setGoing(newValue.label)
+                    setGoingLocationFirstName(newValue.value.address_line1)
+                    setGoingToLatitude(newValue.value.lat)
+                    setGoingToLongitude(newValue.value.lon)
                   } else {
-                    setGoing("");
-                    setGoingToLatitude(null);
-                    setGoingToLongitude(null);
+                    setGoing('')
+                    setGoingToLatitude(null)
+                    setGoingToLongitude(null)
                   }
                 }}
               />
@@ -378,23 +381,23 @@ const RideCard = () => {
             variant="contained"
             fullWidth
             style={{
-              marginTop: "20px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "centers",
+              marginTop: '20px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'centers',
             }}
           >
             Create Ride
           </Button>
         </Box>
       </Paper>
-      {status === "success" &&
+      {status === 'success' &&
         setTimeout(() => {
-          navigate("/bookRide");
+          navigate('/PilotRideHistory')
         }, 2000)}
       ;
     </div>
-  );
-};
+  )
+}
 
-export default RideCard;
+export default RideCard
